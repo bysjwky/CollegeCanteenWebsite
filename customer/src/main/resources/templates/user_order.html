@@ -34,7 +34,7 @@
  </section>
  <div class="Logo_search">
   <div class="Logo">
-   <img src="../images/logo.jpg" title="" alt="模板">
+   <img src="../images/logo.jpg" title="" alt="">
 
   </div>
   <div class="Search"> 
@@ -54,9 +54,6 @@
     <div class="Search_area" id="dd1">
      <input id="fkeyword" type="search"  name="keyword" placeholder="请输入..." class="searchbox" />
      <input id="bt1"  type="button" class="searchbutton" value="搜 索" />
-   <!--<div class="Search_area">
-   <input type="search" id="fkeyword" name="keyword" placeholder="请输入您所需查找的餐厅名称或食物名称..." class="searchbox" />
-   <input type="submit" class="searchbutton" value="搜 索" />-->
    </div>
    </form>
    <p class="hotkeywords"><a href="#" title="酸辣土豆丝">酸辣土豆丝</a><a href="#" title="这里是产品名称">螃蟹炒年糕</a><a href="#" title="这里是产品名称">牛奶炖蛋</a><a href="#" title="这里是产品名称">芝麻酱凉面</a><a href="#" title="这里是产品名称">滑蛋虾仁</a><a href="#" title="这里是产品名称">蒜汁茄子</a></p>
@@ -76,9 +73,7 @@
   <ul>
    <li><i></i><a href="../user_center">用户中心首页</a></li>
    <li><i></i><a href="user_orderlist">我的订单</a></li>
- <li><i></i><a href="../user_address">收货地址</a></li>
-<!--   <li><i></i><a href="../user_message">我的留言</a></li>-->
-<!--   <li><i></i><a href="../user_coupon">我的优惠券</a></li>-->
+   <li><i></i><a href="../user_address">收货地址</a></li>
    <li><i></i><a href="../user_favorites">我的收藏</a></li>
    <li><i></i><a href="../user_account">账户管理</a></li>
    <li><i></i><a href="#">安全退出</a></li>
@@ -98,7 +93,8 @@
 <!--    <th>小计</th>-->
 <!--    <th>配送费用</th>-->
     <th>共计金额</th>
-    <th>收货地址</th>
+    <th>收货信息</th>
+<!--    <th>收货电话</th>-->
     <th>备注</th>
 
     <tr th:each="orderDetail:${orderDetail}">
@@ -107,60 +103,13 @@
      <td th:text="${orderDetail.name}"></td>
      <td th:text="${orderDetail.number}"></td>
      <td th:text="${orderDetail.price}"></td>
-<!--     <td>￥8.00</td>-->
-<!--     <td>￥2.00</td>-->
      <td th:text="${orderDetail.totalPrice}"></td>
-     <td th:text="${orderDetail.address}"></td>
+     <td th:text="${orderDetail.address}+','+ ${orderDetail.phone} +','+ ${orderDetail.nc}"></td>
      <td th:text="${orderDetail.edit}"></td>
-     <!--如果未付款，则显示立即付款按钮-->
-     <td style="display:none;"><a href="#" target="_blank">立即付款</a></td>
+<!--     <td style="display:none;"><a href="#" target="_blank">立即付款</a></td>-->
     </tr>
-  <!-- </table>
-  <span class="Font14 FontW Lineheight35 Block">收件地址：</span>
-  <form action="#">
-   <table class="U-order-A">
-    <tr>
-     <td width="30%" align="right" class="FontW">收件地址：</td>
-     <td>
-     <select name="" class="select_ssq">
-      <option>陕西省</option>
-     </select>
-     <select name="" class="select_ssq">
-      <option>西安市</option>
-     </select>
-     <select name="" class="select_ssq">
-      <option>雁塔区</option>
-     </select>
-     </td>
-    </tr>
-    <tr>
-     <td width="30%" align="right" class="FontW">邮政编码：</td>
-     <td><input type="text" name="" class="input_zipcode"  value="710077" required pattern="[0-9]{6}"></td>
-    </tr>
-    <tr>
-     <td width="30%" align="right" class="FontW">街道地址：</td>
-     <td><input type="text" name="" class="input_addr" value="丈八北路2000集" required></td>
-    </tr>
-    <tr>
-     <td width="30%" align="right" class="FontW">收件人姓名：</td>
-     <td><input type="text" name="" class="input_name" value="deathghost" required></td>
-    </tr>
-    <tr>
-     <td width="30%" align="right" class="FontW">手机号码：</td>
-     <td><input type="text" name="" class="input_tel" value="1582551819" required pattern="[0-9]{11}"></td>
-    </tr>
-    <tr>
-     <td width="30%" align="right" class="FontW">订单备注：</td>
-     <td><input type="text" name="" class="input_mark" value="...速度送货哦...谢谢~"></td>
-    </tr>
-    <tr>
-     <td width="30%" align="right"></td>
-     &lt;!&ndash;未付款订单，可以修改地址！&ndash;&gt;
-     <td><input type="submit" name="" value="确认修改地址" class="Submit">（未付款订单，可以修改地址！）</td>
-    </tr>
-   </table>-->
    </table>
-   </form>
+
  </article>
 </section>
 <!--End content-->

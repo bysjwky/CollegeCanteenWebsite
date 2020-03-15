@@ -14,7 +14,7 @@
         u.shop_name as shop_name,
         u.shop_type as shop_type,
         u.school as school,
-        u.phone as phone,
+        u.photo as photo,
         u.status as status
 
         FROM
@@ -24,9 +24,9 @@
         <if test="user_name != null">
             and u.user_name like  concat('%',#{user_name},'%')
         </if>
-        <if test="userId != null and userId != '' ">
-            and u.id = #{userId}
-        </if>
+<!--        <if test="userId != null and userId != '' ">-->
+<!--            and u.id = #{userId}-->
+<!--        </if>-->
 
     </select>
 

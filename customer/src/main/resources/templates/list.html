@@ -61,9 +61,6 @@
     <div class="Search_area" id="dd1">
      <input id="fkeyword" type="search"  name="keyword" placeholder="请输入..." class="searchbox" />
      <input id="bt1"  type="button" class="searchbutton" value="搜 索" />
-   <!--<div class="Search_area">
-   <input type="search" id="fkeyword" name="keyword" placeholder="请输入您所需查找的餐厅名称或食物名称..." class="searchbox" />
-   <input type="submit" class="searchbutton" value="搜 索" />-->
    </div>
    </form>
    <p class="hotkeywords"><a href="#" title="酸辣土豆丝">酸辣土豆丝</a><a href="#" title="这里是产品名称">螃蟹炒年糕</a><a href="#" title="这里是产品名称">牛奶炖蛋</a><a href="#" title="这里是产品名称">芝麻酱凉面</a><a href="#" title="这里是产品名称">滑蛋虾仁</a><a href="#" title="这里是产品名称">蒜汁茄子</a></p>
@@ -83,42 +80,16 @@
   <ul class="select">
 		<li class="select-list">
 			<dl id="select1">
-				<dt>分类：</dt>
-				<dd class="select-all selected"><a href="javascript:">全部</a></dd>
+<!--				<dt>分类：</dt>-->
+<!--				<dd class="select-all selected"><a href="javascript:">全部</a></dd>-->
 				<dd><a href="javascript:">简餐</a></dd>
                 <dd><a href="javascript:">西餐</a></dd>
                 <dd><a href="javascript:">面食</a></dd>
                 <dd><a href="javascript:">水果</a></dd>
                 <dd><a href="javascript:">甜品</a></dd>
                 <dd><a href="javascript:">饮品</a></dd>
-                <!--<dd><a href="javascript:">火锅/干锅</a></dd>
-                <dd><a href="javascript:">火锅/干锅</a></dd>
-                <dd><a href="javascript:">火锅/干锅</a></dd>
-                <dd><a href="javascript:">火锅/干锅</a></dd>
-                <dd><a href="javascript:">火锅/干锅</a></dd>-->
 			</dl>
 		</li>
-		<!--<li class="select-list">
-
-		</li>-->
-		<!--<li class="select-list">
-			<dl id="select3">
-				<dt>餐点：</dt>
-				<dd class="select-all selected"><a href="javascript:">全部</a></dd>
-				<dd><a href="javascript:">早餐</a></dd>
-			</dl>
-		</li>-->
-        <!--<li class="select-list">
-			<dl id="select4">
-				<dt>价位区间：</dt>
-				<dd class="select-all selected"><a href="javascript:">全部</a></dd>
-				<dd><a href="javascript:">20元以下</a></dd>
-                <dd><a href="javascript:">20-40元</a></dd>
-                <dd><a href="javascript:">40-60元</a></dd>
-                <dd><a href="javascript:">60-80元</a></dd>
-                <dd><a href="javascript:">80-100元</a></dd>
-			</dl>
-		</li>-->
 		<!--<li class="select-result">
 			<dl>
 			 <dd class="select-no">已选择：</dd>
@@ -126,38 +97,38 @@
 		</li>-->
 	</ul>
  </section>
-<section class="Fslmenu">
- <a href="#" title="默认排序">
+<!--<section class="Fslmenu"></section>-->
+ <!--<a href="#" title="默认排序">
   <span>
   <span>默认排序</span>
   <span></span>
   </span>
- </a>
- <a href="#" title="评价">
+ </a>-->
+ <!--<a href="#" title="评价">
   <span>
   <span>评价</span>
   <span class="s-up"></span>
   </span>
- </a>
- <a href="#" title="销量">
+ </a>-->
+<!-- <a href="#" title="销量">
   <span>
   <span>销量</span>
   <span class="s-up"></span>
   </span>
- </a>
- <a href="#" title="价格排序">
+ </a>-->
+ <!--<a href="#" title="价格排序">
   <span>
   <span>价格</span>
   <span class="s-down"></span>
   </span>
- </a>
- <a href="#" title="发布时间排序">
+ </a>-->
+ <!--<a href="#" title="发布时间排序">
   <span>
   <span>发布时间</span>
   <span class="s-up"></span>
   </span>
- </a>
-</section>
+ </a>-->
+
 <section class="Fsl">
  <ul >
   <li th:each="sellerUserInfo : ${sellerLists}">
@@ -175,40 +146,7 @@
 <!--  </div>-->
   </li>
  </ul>
- <!--<aside>
-  <div class="title">热门商家</div>
-  <div class="C-list">
-   <a href="../shop" target="_blank" title="店铺名称"><img src="../upload/cc.jpg"></a>
-   <p><a href="../shop" target="_blank">[大雁塔]店铺名称</a></p>
-   <p>
-   <span>人均：20~50元</span>
-   <span style=" float:right">
-    <img src="../images/star-on.png">
-    <img src="../images/star-on.png">
-    <img src="../images/star-on.png">
-    <img src="../images/star-on.png">
-    <img src="../images/star-off.png">
-    <span class="ALscore">4.8</span>
-   </span>
-   </p>
-  </div>
-  <div class="C-list">
-   <a href="../shop" target="_blank" title="店铺名称"><img src="../upload/cc.jpg"></a>
-   <p><a href="../shop" target="_blank">[大雁塔]店铺名称</a></p>
-   <p>
-   <span>人均：20~50元</span>
-   <span style=" float:right">
-    <img src="../images/star-on.png">
-    <img src="../images/star-on.png">
-    <img src="../images/star-on.png">
-    <img src="../images/star-on.png">
-    <img src="../images/star-off.png">
-    <span class="ALscore">4.8</span>
-   </span>
-   </p>
-  </div>
- </aside>-->
- <div class="TurnPage">
+ <!--<div class="TurnPage">
   <a href="#">
   <span class="Prev"><i></i>首页</span>
   </a>
@@ -217,7 +155,7 @@
   <a href="#">
   <span class="Next">最后一页<i></i></span>
   </a>
- </div>
+ </div>-->
 <!--</section>-->
 </section>
 <!--End content-->

@@ -2,9 +2,12 @@ package com.jiangxiacollege.canteenwebsite.admin.controller;
 
 
 import com.jiangxiacollege.canteenwebsite.admin.model.Order;
+import com.jiangxiacollege.canteenwebsite.admin.model.SellerUserInfo;
+import com.jiangxiacollege.canteenwebsite.admin.model.User;
 import com.jiangxiacollege.canteenwebsite.admin.service.OrderService;
 import com.jiangxiacollege.canteenwebsite.admin.vo.DataTableResult;
 import com.jiangxiacollege.canteenwebsite.admin.vo.Json;
+import com.jiangxiacollege.canteenwebsite.admin.vo.OrderDetailVo;
 import com.jiangxiacollege.canteenwebsite.admin.vo.OrderVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/OrderController")
@@ -44,6 +48,13 @@ public class OrderController {
     @ResponseBody
     public DataTableResult list(HttpServletRequest request, OrderVO orderVO) {
         // DataTableResult返回给datatables控件的数据格式
+        int roleId = Integer.parseInt(String.valueOf(request.getSession().getAttribute("roleId")));
+        String userId = ((User)request.getSession().getAttribute("user")).getId();
+        if(roleId ==1){
+            orderVO.setUserId("");
+        }else if(roleId ==3){
+            orderVO.setUserId(userId);
+        }
         DataTableResult result = new DataTableResult();
         // 获取分页参数
         int start = Integer.parseInt(request.getParameter("start"));
@@ -129,4 +140,25 @@ public class OrderController {
         return "admin/login";
     }
 
+    @RequestMapping("/orderDetail")
+    @ResponseBody
+    public Json orderDetail(HttpServletRequest request){
+        Json j = new Json();
+        String orderId = request.getParameter("orderId");
+        List<OrderDetailVo> list = (List<OrderDetailVo>) orderService.orderDetail(orderId).getData();
+        if (!StringUtils.isEmpty(orderId)) {
+            j.setSuccess(true);
+            j.setObj(list);
+        } else {
+            j.setSuccess(false);
+            j.setMsg("失败");
+        }
+        return j;
+
+    }
+    @RequestMapping("send")
+    @ResponseBody
+    public Json sendById(Order order) {
+        return  orderService.sendById(order);
+    }
 }

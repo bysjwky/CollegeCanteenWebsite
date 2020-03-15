@@ -17,7 +17,10 @@ public class viewController {
     public String articleRead(){
         return "article_read";
     }
-
+   /* @RequestMapping( "/comment")
+    public String comment(){
+        return "comment";
+    }*/
 //    @RequestMapping( "/cart")
 //    public String cart(){
 //        return "cart";

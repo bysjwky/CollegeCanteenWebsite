@@ -49,4 +49,19 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         }
         return responseBase;
     }
+//写评论
+    @Override
+    public ResponseBase plOrder(Comment comment) {
+            ResponseBase responseBase = new ResponseBase();
+            Boolean flag = this.save(comment);
+            if (flag){
+                responseBase.setCode(0);
+                responseBase.setMessage("评论成功");
+            }else {
+                responseBase.setCode(1);
+                responseBase.setMessage("评论失败");
+            }
+            return responseBase;
+        }
+
 }

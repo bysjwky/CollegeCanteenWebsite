@@ -7,7 +7,9 @@ import java.sql.Timestamp;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 
+@Data
 @TableName("t_sys_user")//数据库对应表名
 public class User {
 	
@@ -23,49 +25,8 @@ public class User {
 	private String photo;//与字段名称大小写一致
 	private String introduce;//与字段名称大小写一致
 	private String usertype;//与字段名称大小写一致
-	
-	
-	public String getUsertype() {
-		return usertype;
-	}
-	public void setUsertype(String usertype) {
-		this.usertype = usertype;
-	}
-	public Timestamp getBirthday() {
-		return birthday;
-	}
-	public void setBirthday(Timestamp birthday) {
-		this.birthday = birthday;
-	}
-	public String getPhoto() {
-		return photo;
-	}
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
-	public String getIntroduce() {
-		return introduce;
-	}
-	public void setIntroduce(String introduce) {
-		this.introduce = introduce;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	private String seller_id;//与字段名称大小写一致
+
+
 	
 }

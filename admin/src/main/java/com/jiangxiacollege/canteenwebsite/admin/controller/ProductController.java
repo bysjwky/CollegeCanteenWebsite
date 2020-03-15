@@ -55,7 +55,7 @@ public class ProductController
     public DataTableResult list(HttpServletRequest request, ProductVO productVO) {
         // DataTableResult返回给datatables控件的数据格式
         int roleId = Integer.parseInt(String.valueOf(request.getSession().getAttribute("roleId")));
-        String userId = ((User)request.getSession().getAttribute("user")).getId();
+        String userId = ((User)request.getSession().getAttribute("user")).getSeller_id();
         if(roleId ==1){
             productVO.setUserId("");
         }else if(roleId ==3){

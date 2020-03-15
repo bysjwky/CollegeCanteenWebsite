@@ -13,6 +13,7 @@
             u.photo as photo,
             u.usertype as usertype,
             u.introduce as introduce
+
 <!--             r.name as rolename -->
         FROM
             t_sys_user u

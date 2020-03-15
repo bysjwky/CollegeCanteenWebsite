@@ -9,7 +9,6 @@
          id,
          seller_id,
          customer_id,
-         product_id,
          address_id,
          status,
          money,
@@ -19,7 +18,7 @@
 
 
         FROM
-            order
+            orders
 
         WHERE 1=1
         <!--<if test="order.customerId != null">
@@ -29,7 +28,9 @@
             and o.time like  concat('%',#{time},'%')
         </if>
 -->
-
+        <if test="userId != null and userId != '' ">
+            and seller_id = #{userId}
+        </if>
     </select>
 
 

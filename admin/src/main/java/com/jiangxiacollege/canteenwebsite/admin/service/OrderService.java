@@ -2,20 +2,20 @@ package com.jiangxiacollege.canteenwebsite.admin.service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.jiangxiacollege.canteenwebsite.admin.mapper.NoticeMapper;
 import com.jiangxiacollege.canteenwebsite.admin.mapper.OrderMapper;
-import com.jiangxiacollege.canteenwebsite.admin.model.Notice;
-import com.jiangxiacollege.canteenwebsite.admin.model.Order;
+import com.jiangxiacollege.canteenwebsite.admin.model.*;
 import com.jiangxiacollege.canteenwebsite.admin.util.Convert;
 import com.jiangxiacollege.canteenwebsite.admin.util.SnowflakeIdWorker;
 import com.jiangxiacollege.canteenwebsite.admin.vo.DataTableResult;
-import com.jiangxiacollege.canteenwebsite.admin.vo.NoticeVO;
+import com.jiangxiacollege.canteenwebsite.admin.vo.Json;
+import com.jiangxiacollege.canteenwebsite.admin.vo.OrderDetailVo;
 import com.jiangxiacollege.canteenwebsite.admin.vo.OrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -96,6 +96,58 @@ public class OrderService {
         result.setRecordsFiltered(page.getTotal());
         result.setData(page.getRecords());
         return result;
+    }
+
+    public ResponseBase orderDetail(String orderId) {
+        ResponseBase responseBase = new ResponseBase();
+        try {
+            List<OrderDetailVo> list = orderMapper.orderDetail(orderId);
+            for(OrderDetailVo orderDetailVo : list){
+                BigDecimal totalPrice = orderDetailVo.getPrice().multiply(new BigDecimal(orderDetailVo.getNumber()));
+                orderDetailVo.setTotalPrice(totalPrice);
+            }
+            responseBase.setData(list);
+
+        }catch (Exception e){
+            responseBase.setCode(1);
+            responseBase.setMessage("订单查询错误");
+        }
+        return responseBase;
+    }
+    @Transactional
+    public Json sendById(Order order){
+        Json j = new Json();
+        if (this.updateById(order) > 0) {
+            j.setSuccess(true);
+            j.setMsg("修改成功！");
+           /* if(order.getStatus()==1){
+                SellerUserInfo seller =this.selectById(String.valueOf(order.getId()));
+                String userName = seller.getUser_name();
+                String password = seller.getPassword();
+                String photo = seller.getPhoto();
+
+                User user = new User();
+                user.setSeller_id(String.valueOf(order.getId()));
+                user.setUsername(userName);
+                user.setPassword(password);
+                user.setPhoto(photo);
+                user.setUsertype("普通用户");
+                userService.insert(user);
+
+                SnowflakeIdWorker idWorker = new SnowflakeIdWorker(0, 0);
+                UserRole userRole = new UserRole();
+                userRole.setId(String.valueOf(idWorker.nextId()));
+                userRole.setSys_user_id(user.getId());
+                userRole.setSys_role_id("3");
+                roleService.insertUserRole(userRole);
+
+            }*/
+        } else {
+            j.setSuccess(false);
+            j.setMsg("修改失败！");
+        }
+        return j;
+
     }
 
 }

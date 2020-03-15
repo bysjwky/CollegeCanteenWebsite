@@ -96,26 +96,17 @@
  </aside>-->
  <div class="F-middle">
  <ul class="rslides f426x240">
-        <li><a href="javascript:"><img src="../upload/03.jpg" width="900" height="403"/></a></li>
-        <li><a href="javascript:"><img src="../upload/02.jpg" width="900" height="403"/></a></li>
-        <li><a href="javascript:"><img src="../upload/01.jpg" width="900" height="403"/></a></li>
+        <li><a href="javascript:"><img src="../upload/lb1.jpg" width="870" height="403"/></a></li>
+        <li><a href="javascript:"><img src="../upload/lb2.jpg" width="870" height="403"/></a></li>
+        <li><a href="javascript:"><img src="../upload/lb3.jpg" width="870" height="403"/></a></li>
     </ul>
  </div>
- <aside class="N-right">
-  <div class="N-title">公告栏 </div>
-
-  <ul class="Orderlist" id="UpRoll" th:each="notice : ${noticeList}">
-   <li th:text="${notice.content}">
+ <aside class="N-right" >
+  <div class="N-title" >公告栏 </div>
+  <ul class="Orderlist" id="UpRoll" >
+   <li th:each="notice : ${noticeList}" th:text="${notice.content}">
     <p></p>
    </li>
-   <!--<li>
-    <p>欢迎欢迎热列欢迎</p>
-    <p>本网站便捷好用</p>
-   </li>
-   <li>
-    <p>欢迎欢迎热列欢迎</p>
-    <p>本网站便捷好用</p>
-   </li>-->
   </ul>
   <script>
    var UpRoll = document.getElementById('UpRoll');
@@ -141,22 +132,13 @@
   <div id="Indexouter">
    <ul id="Indextab">
     <li class="current">热门精选</li>
-    <!--<p class="class_B">
-    <a href="#">简餐</a>
-    <a href="#">面食</a>
-    <a href="#">西餐</a>
-    <a href="#">甜品</a>
-    <a href="#">水果</a>
-    <a href="#">饮品</a>
-    <span><a href="#" target="_blank">more ></a></span>
-    </p>-->
    </ul>
   <div id="Indexcontent">
  <ul style="display:block;" >
   <li>
      <div class="SCcontent"  >
          <p th:each="product : ${productList}">
-     <a href="../detailsp" target="_blank" th:title="${product.name}">
+     <a href="../detailsp?productId='+${productInfo.id}" target="_blank" th:title="${product.name}">
          <figure>
        <img th:src="${product.photo}">
        <figcaption>
@@ -169,113 +151,16 @@
      </div>
      <div class="bestshop">
      <p  th:each="sellerUserInfo : ${sellerList}">
-      <a href="../shop" target="_blank" th:title="${sellerUserInfo.shopName}">
-      <figure>
-       <img th:src="${sellerUserInfo.photo}">
-      </figure>
+      <a href="'../shop?sellerId='+${sellerUserInfo.id}" target="_blank" th:title="${sellerUserInfo.shopName}">
+       <figure>
+        <img th:src="${sellerUserInfo.photo}">
+       </figure>
       </a>
-     <!-- <a href="../shop" target="_blank" title="店铺名称">
-      <figure>
-       <img src="../upload/weijia.jpg">
-      </figure>
-      </a>
-      <a href="../shop" target="_blank" title="店铺名称">
-      <figure>
-       <img src="../upload/wpjnewlogo.jpg">
-      </figure>
-      </a>
-      <a href="../shop" target="_blank" title="店铺名称">
-      <figure>
-       <img src="../upload/weijia.jpg">
-      </figure>
-      </a>
-      <a href="../shop" target="_blank" title="店铺名称">
-      <figure>
-       <img src="../upload/wpjnewlogo.jpg">
-      </figure>
-      </a>-->
      </p>
      </div>
+
     </li>
    </ul>
-  <!-- <ul>
-  <li>
-     <p class="seekarea">
-     <a href="#">碑林区</a>
-     <a href="#">新城区</a>
-     <a href="#">未央区</a>
-     <a href="#">雁塔区</a>
-     <a href="#">莲湖区</a>
-     <a href="#">高新区</a>
-     <a href="#">灞桥区</a>
-     <a href="#">高陵区</a>
-     <a href="#">阎良区</a>
-     <a href="#">临潼区</a>
-     <a href="#">长安区</a>
-     <a href="#">周至县</a>
-     <a href="#">蓝田县 </a>
-     </p>
-     <div class="DCcontent">
-       <a href="../shop" target="_blank" title="TITLE:店名">
-       <figure>
-       <img src="../upload/cc.jpg">
-       <figcaption>
-       <span class="title">老重庆川菜馆</span>
-       <span class="price">预定折扣：<i>8.9折</i></span>
-       </figcaption>
-       <p class="p1"><q>仅售169元！价值289元的4-5人餐，提供免费WiFi。</q></p>
-       <p class="p2">
-       店铺评分：
-       <img src="../images/star-on.png">
-       <img src="../images/star-on.png">
-       <img src="../images/star-on.png">
-       <img src="../images/star-on.png">
-       <img src="../images/star-off.png">
-       </p>
-       <p class="p3">店铺地址：西安市雁塔区丈八路***老重庆川菜馆...</p>
-       </figure>
-      </a>
-       <a href="../shop" target="_blank" title="TITLE:店名">
-       <figure>
-       <img src="../upload/cc.jpg">
-       <figcaption>
-       <span class="title">老重庆川菜馆</span>
-       <span class="price">预定折扣：<i>8.9折</i></span>
-       </figcaption>
-       <p class="p1"><q>仅售169元！价值289元的4-5人餐，提供免费WiFi。</q></p>
-       <p class="p2">
-       店铺评分：
-       <img src="../images/star-on.png">
-       <img src="../images/star-on.png">
-       <img src="../images/star-on.png">
-       <img src="../images/star-on.png">
-       <img src="../images/star-off.png">
-       </p>
-       <p class="p3">店铺地址：西安市雁塔区丈八路***老重庆川菜馆...</p>
-       </figure>
-      </a>
-       <a href="../shop" target="_blank" title="TITLE:店名">
-       <figure>
-       <img src="../upload/cc.jpg">
-       <figcaption>
-       <span class="title">老重庆川菜馆</span>
-       <span class="price">预定折扣：<i>8.9折</i></span>
-       </figcaption>
-       <p class="p1"><q>仅售169元！价值289元的4-5人餐，提供免费WiFi。</q></p>
-       <p class="p2">
-       店铺评分：
-       <img src="../images/star-on.png">
-       <img src="../images/star-on.png">
-       <img src="../images/star-on.png">
-       <img src="../images/star-on.png">
-       <img src="../images/star-off.png">
-       </p>
-       <p class="p3">店铺地址：西安市雁塔区丈八路***老重庆川菜馆...</p>
-       </figure>
-      </a>
-     </div>
-  </li>
-  </ul>-->
  </div>
  </div>
  </article>

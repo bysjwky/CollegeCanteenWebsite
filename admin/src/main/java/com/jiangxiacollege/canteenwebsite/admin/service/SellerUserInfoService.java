@@ -6,9 +6,12 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.jiangxiacollege.canteenwebsite.admin.mapper.SellerUserInfoMapper;
 import com.jiangxiacollege.canteenwebsite.admin.model.ResponseBase;
 import com.jiangxiacollege.canteenwebsite.admin.model.SellerUserInfo;
+import com.jiangxiacollege.canteenwebsite.admin.model.User;
+import com.jiangxiacollege.canteenwebsite.admin.model.UserRole;
 import com.jiangxiacollege.canteenwebsite.admin.util.Convert;
 import com.jiangxiacollege.canteenwebsite.admin.util.SnowflakeIdWorker;
 import com.jiangxiacollege.canteenwebsite.admin.vo.DataTableResult;
+import com.jiangxiacollege.canteenwebsite.admin.vo.Json;
 import com.jiangxiacollege.canteenwebsite.admin.vo.SellerUserInfoVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +29,14 @@ public class SellerUserInfoService {
 
     @Autowired
     private SellerUserInfoMapper sellerUserInfoMapper;
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private SellerService sellerService;// 注入业务层的service
+    @Autowired
+    private RoleService roleService;
+
 
 
 
@@ -106,6 +117,43 @@ public class SellerUserInfoService {
         result.setRecordsFiltered(page.getTotal());
         result.setData(page.getRecords());
         return result;
+    }
+
+//管理员商家审核
+    @Transactional
+    public Json auditById(SellerUserInfo sellerUserInfo){
+        Json j = new Json();
+        if (this.updateById(sellerUserInfo) > 0) {
+            j.setSuccess(true);
+            j.setMsg("修改成功！");
+            if(sellerUserInfo.getStatus()==1){
+                SellerUserInfo seller =this.selectById(String.valueOf(sellerUserInfo.getId()));
+                String userName = seller.getUser_name();
+                String password = seller.getPassword();
+                String photo = seller.getPhoto();
+
+                User user = new User();
+                user.setSeller_id(String.valueOf(sellerUserInfo.getId()));
+                user.setUsername(userName);
+                user.setPassword(password);
+                user.setPhoto(photo);
+                user.setUsertype("普通用户");
+                userService.insert(user);
+
+                SnowflakeIdWorker idWorker = new SnowflakeIdWorker(0, 0);
+                UserRole userRole = new UserRole();
+                userRole.setId(String.valueOf(idWorker.nextId()));
+                userRole.setSys_user_id(user.getId());
+                userRole.setSys_role_id("3");
+                roleService.insertUserRole(userRole);
+
+            }
+        } else {
+            j.setSuccess(false);
+            j.setMsg("修改失败！");
+        }
+        return j;
+
     }
 
 

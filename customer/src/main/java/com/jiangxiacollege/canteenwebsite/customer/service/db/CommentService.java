@@ -10,5 +10,5 @@ public interface CommentService extends IService<Comment> {
 
     ResponseBase commentCount(String productId);  //评论计数
 
-
+    ResponseBase plOrder(Comment comment);
 }

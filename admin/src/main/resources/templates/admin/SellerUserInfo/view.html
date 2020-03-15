@@ -98,7 +98,7 @@
 										<th>店名</th>
 										<th>类别</th>
 										<th>学校</th>
-										<th>照片</th>
+<!--										<th>照片</th>-->
 										<th>状态</th>
 										<th>操作</th>
 									</tr>
@@ -236,40 +236,6 @@
 	</div>
 </div>
 <!-- 模态窗口结束 -->
- 
-
-<!-- 分配角色模态窗口 -->   
-<!--<div class="modal fade" data-backdrop="static" id="rolemodal" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">
-					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-				</button>
-				<h2 class="modal-title" id="rolemodaltitle">分配角色</h2>
-			</div>
-			<div class="modal-body">
-				<div class="row">
-					&lt;!&ndash; 表单布局 &ndash;&gt;
-					<form id="roleform">
-							<div class="col-md-12">
-							&lt;!&ndash; 保存修改的主键值 &ndash;&gt;
-						    <input type="hidden" name="userid" id="userid">
-						    <ul id="tree" class="ztree"></ul>
-							</div>
-					</form>
-					&lt;!&ndash; 表单布局结束 &ndash;&gt;
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-white"
-					data-dismiss="modal">关闭</button>
-				<button type="button" class="btn btn-primary" id="btn_rolesave">保存</button>
-			</div>
-		</div>
-	</div>
-</div>-->
-<!-- 模态窗口结束 -->
 
 	<!-- 全局js -->
 	<script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
@@ -313,67 +279,64 @@
 	<script>
 	    //表格行中的按钮点击事件
 	    function edit(id){
-	    	//异步获取数据
-        	$.ajax({
-        		type: "get",
-        		data: {
-        		   id:id,//第一个id为参数名，第二个为参数值
-        		},
-        		url: "/SellerUserInfoController/select",//后台处理地址
-        		success: function (data) {
-        		   //console.log(data);
-        		   if(data.success){
-        			    //设置数据
-        			    $("#id").val(data.obj.id);//修改数据必须有主键值
+		 //异步获取数据
+		$.ajax({
+			type: "get",
+			data: {
+				id:id,//第一个id为参数名，第二个为参数值
+			},
+			url: "/SellerUserInfoController/select",//后台处理地址
+			success: function (data) {
+				//console.log(data);
+				if(data.success){
+					//设置数据
+					$("#id").val(data.obj.id);//修改数据必须有主键值
 
-        	    		$("#user_name").val(data.obj.user_name);
-        	    		$("#password").val(data.obj.password);
-        	    		$("#phone").val(data.obj.phone);
-        	    		$("#address").val(data.obj.address);
-        	    		$("#shop_name").val(data.obj.shop_name);
-        	    		$("#shop_type").val(data.shop_type);
-					   $("#school").val(data.school);
-					   $('#photo').attr("src",data.photo);
-					    $("#status").val(data.status);
+					$("#user_name").val(data.obj.user_name);
+					$("#password").val(data.obj.password);
+					$("#phone").val(data.obj.phone);
+					$("#address").val(data.obj.address);
+					$("#shop_name").val(data.obj.shop_name);
+					$("#shop_type").val(data.shop_type);
+					$("#school").val(data.school);
+					$('#photo').attr("src",data.photo);
+					$("#status").val(data.status);
 
-        	    		$("#modaltitle").text("修改");
-        	    		$("#modal").modal("show");
-        		   }else{
-        			    toastr.error(data.msg, '错误!');
-        		   }
-        		}
-        	}); // end ajax
-	    	
-	    }//end edit
+					$("#modaltitle").text("修改");
+					$("#modal").modal("show");
+				}else{
+					toastr.error(data.msg, '错误!');
+				}
+			}
+		}); // end ajax
+
+		}//end edit
 	    
 	    //表格行中的按钮点击事件
-	    function role(id){
-	    	//异步获取数据
-        	$.ajax({
-        		type: "get",
-        		data: {
-        		   id:id,//第一个id为参数名，第二个为参数值
-        		},
-        		url: "/RoleController/tree",//后台处理地址
-        		success: function (data) {
-        			//ztree
-                	var setting = {
-                			check: {
-                				enable: true
-                			},
-                			data: {
-                				simpleData: {
-                					enable: true
-                				}
-                			}
-                	};
-                	$.fn.zTree.init($("#tree"), setting, data);
-                	$("#userid").val(id);//通过隐藏input保存用户id
-        	    	$("#rolemodal").modal("show");
-        		}
-        	}); // end ajax
+		function audit(id,status){
+			//异步获取数据
+			$.ajax({
+				type: "get",
+				data: {
+					id:id,//第一个id为参数名，第二个为参数值
+					status:status
+				},
+				url: "/SellerController/audit",//后台处理地址
+				success: function (data) {
+					//console.log(data);
+					if(data.success){
+						window.location.reload();
+					}else{
+						toastr.error(data.msg, '错误!');
+					}
+				}
+			}); // end ajax
 
-	    }
+		}//end ed
+
+
+
+
 	    
         $(document).ready(function () {
         	//datatable
@@ -420,14 +383,27 @@
 					 {"data":"shop_name","name":"shop_name"},
 					 {"data":"shop_type","name":"shop_type"},
 					 {"data":"school","name":"school"},
-					 {"data":"photo","name":"photo"},
-					  {"data":"status","name":"status"},
+					 // {"data":"photo","name":"photo"},
+					  {"data":function ( data, type, full, meta ) {
+					  	if(data.status==0){
+					  		return "未审核";
+						}else if(data.status==1){
+							return "通过";
+						}else {
+							return "未通过";
+						}
+
+						  }},
 
  					//有排序功能必须指定name为字段名称
  					{"data":"id","orderable": false,
  						"render": function ( data, type, full, meta ) {
- 								return '<button id="btn_edit" class="btn btn-primary btn-sm" onclick="edit(\''+data+'\')"><i class="fa fa-edit"></i>&nbsp;查看修改 </button>  <button  class="btn btn-primary btn-sm"><li class="fa fa-edit"></li>&nbsp;通过</button> <button  class="btn btn-primary btn-sm"><li class="fa fa-edit"></li>&nbsp;不通过</button>';
- 							}
+ 						 var str = '<button id="btn_edit" class="btn btn-primary btn-sm" onclick="edit(\''+data+'\')"><i class="fa fa-edit"></i>&nbsp;查看修改</button>'  ;
+ 						 if(full.status==0){
+							 str+='<button  class="btn btn-primary btn-sm" onclick="audit(\''+data+'\',1)" ><li class="fa fa-edit"></li>&nbsp;通过</button> <button  class="btn btn-primary btn-sm" onclick="audit(\''+data+'\',2)"><li class="fa fa-edit"></li>&nbsp;不通过</button>';
+						 }else
+						 {   str += '<b>已审核</b>'}
+ 								return  str	}
  					},
                   ],
                   "order": [

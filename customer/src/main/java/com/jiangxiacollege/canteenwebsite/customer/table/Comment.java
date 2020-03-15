@@ -12,11 +12,11 @@ import java.math.BigDecimal;
 @Data
 public class Comment implements Serializable{
     @TableId(type= IdType.AUTO)
-    private int id;
-    private int productId;
-    private int customerId;
-    private int sellerId;
-    private int orderId;
+    private Long id;
+    private Long productId;
+    private Long customerId;
+    private Long sellerId;
+    private Long orderId;
     private String writing;
 
 

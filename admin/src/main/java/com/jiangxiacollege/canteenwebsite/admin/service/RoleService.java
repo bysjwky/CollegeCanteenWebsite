@@ -132,6 +132,12 @@ public class RoleService {
 		return userRoleMapper.selectOne(userRole);
 	}
 
+	@Transactional
+	public int insertUserRole(UserRole userRole){
+
+		return userRoleMapper.insert(userRole);
+	}
+
 
 
 }

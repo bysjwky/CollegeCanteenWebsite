@@ -30,6 +30,7 @@ public class OrderVo implements Serializable{
     private String name;
     private String address;
     private String productName;
+    private Long cartId;
 
 
 

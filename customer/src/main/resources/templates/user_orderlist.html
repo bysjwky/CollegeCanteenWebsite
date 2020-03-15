@@ -100,16 +100,83 @@
       <td th:text="${order.name}"></td>
       <td th:text="${order.money}"></td>
          <p th:switch="${order.status}">
-         <td th:case="0">已送达</td>
+         <td th:case="0">未发货</td>
          <td th:case="1">已发货</td>
-         <td th:case="2">未发货</td>
-         <td th:case="3">未付款</td>
+         <td th:case="2">已送达</td>
+<!--         <td th:case="3">未付款</td>-->
          </p>
-      <td><a href="#">取消订单</a> | <a href="#">付款</a> | <a href="#">确认送达</a> | <a href="#">评论商品</a></td>
-
+      <td>
+<!--          <a href="#">取消订单</a>  | <a href="#">确认送达</a> | <a href="#">评论商品</a>-->
+          <span th:if="${order.status} eq 0">
+            <button  th:id="'qx'+${orderStat.index}" value="qx" th:onclick="qxAction('qx'+[[${orderStat.index}]],'sd'+[[${orderStat.index}]],'pl'+[[${orderStat.index}]],'[[${order.id}]]')">取消订单</button>
+          </span>
+          <span th:if="${order.status} eq 1">
+          <button  th:id="'sd'+${orderStat.index}" value="sd"th:onclick="sdAction('qx'+[[${orderStat.index}]],'sd'+[[${orderStat.index}]],'pl'+[[${orderStat.index}]],'[[${order.id}]]')">确认送达</button>
+          </span>
+          <span th:if="${order.status} eq 2">
+          <a th:href="'../comment?orderId='+${order.id}"><button name="pl" th:id="'pl'+${orderStat.index}" value="pl"  >评论</button></a>
+              </span>
+      </td>
      </tr>
     </table>
-    <div class="TurnPage">
+      <script th:inline="javascript">
+          function qxAction(qxId,sdId,plId,orderId){
+              var id =orderId;
+              $.ajax({
+                  type: "post",
+                  url: "/delOrder",
+                  contenType: "application/json",
+                  dataType: "json",
+                  data:JSON.stringify({
+                      orderId:id
+
+                  }),
+                  success:function(data){
+                      if(data.code == 1) {
+                          alert(data.message);
+                      } else {
+                          alert("取消订单成功");
+                          window.location.reload();
+                      }
+                  },
+                  error:function() {
+                      alert("系统繁忙，请稍后再试...");
+                  }
+              });
+          }
+      </script>
+
+      <script th:inline="javascript">
+          function sdAction(qxId,sdId,plId,orderId){
+               var id =orderId;
+              $.ajax({
+                  type: "post",
+                  url: "/updateOrder",
+                  contenType: "application/json",
+                  dataType: "json",
+                  data:JSON.stringify({
+                      orderId:id
+                  }),
+                  success:function(data){
+                      if(data.code == 1) {
+                          alert(data.message);
+                      } else {
+                          alert("订单送达成功");  window.location.reload();
+                          /*$('#'+plId).show();
+                          $('#'+qxId).hide();
+                          $('#'+sdId).hide();*/
+
+                      }
+                  },
+                  error:function() {
+                      alert("系统繁忙，请稍后再试...");
+                  }
+              });
+          }
+      </script>
+
+
+    <!--<div class="TurnPage">
          <a href="#">
           <span class="Prev"><i></i>首页</span>
          </a>
@@ -118,7 +185,7 @@
          <a href="#">
          <span class="Next">最后一页<i></i></span>
         </a>
-       </div>
+       </div>-->
   </section>
  </article>
 </section>
