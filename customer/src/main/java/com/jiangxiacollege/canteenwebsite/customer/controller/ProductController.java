@@ -33,6 +33,7 @@ public class ProductController {
        @Resource
        private CommentService commentService;
 
+    //首页展示
        @RequestMapping("/")
     public String productList(Model model){
         List<Product> list =   (List)productService.productList().getData();
@@ -55,4 +56,3 @@ public class ProductController {
         return "detailsp";
     }
 }
-//首页展示

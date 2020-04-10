@@ -1,5 +1,6 @@
 package com.jiangxiacollege.canteenwebsite.admin.controller;
 
+import com.jiangxiacollege.canteenwebsite.admin.model.Product;
 import com.jiangxiacollege.canteenwebsite.admin.model.SellerUserInfo;
 import com.jiangxiacollege.canteenwebsite.admin.model.User;
 import com.jiangxiacollege.canteenwebsite.admin.model.UserRole;
@@ -7,6 +8,7 @@ import com.jiangxiacollege.canteenwebsite.admin.service.RoleService;
 import com.jiangxiacollege.canteenwebsite.admin.service.SellerService;
 import com.jiangxiacollege.canteenwebsite.admin.service.SellerUserInfoService;
 import com.jiangxiacollege.canteenwebsite.admin.service.UserService;
+import com.jiangxiacollege.canteenwebsite.admin.util.ImageUtil2;
 import com.jiangxiacollege.canteenwebsite.admin.util.SnowflakeIdWorker;
 import com.jiangxiacollege.canteenwebsite.admin.vo.DataTableResult;
 import com.jiangxiacollege.canteenwebsite.admin.vo.Json;
@@ -35,6 +37,9 @@ public class SellerController {
 
     private String prefix = "admin/seller";// 页面的路径，注意admin前面不要有/
 
+    @Value("${pf}")
+    private String pf;
+
     // 图片存放根路径，从application.yml中读取upload
     @Value("${upload}")
     private String UPLOAD_PATH;
@@ -42,10 +47,8 @@ public class SellerController {
     @Autowired
     private SellerService sellerService;// 注入业务层的service
 
-
     @Autowired
     private SellerUserInfoService sellerUserInfoService;
-
 
     // 未加入@ResponseBody用来返回数据给页面
     @RequestMapping("view")
@@ -63,10 +66,11 @@ public class SellerController {
         // DataTableResult返回给datatables控件的数据格式
         int roleId = Integer.parseInt(String.valueOf(request.getSession().getAttribute("roleId")));
         String userId = ((User)request.getSession().getAttribute("user")).getId();
+        String sellerId = ((User)request.getSession().getAttribute("user")).getSeller_id();
         if(roleId ==1){
             sellerUserInfoVO.setUserId("");
         }else if(roleId ==3){
-            sellerUserInfoVO.setUserId(userId);
+            sellerUserInfoVO.setUserId(sellerId);
         }
         DataTableResult result = new DataTableResult();
         // 获取分页参数
@@ -127,7 +131,14 @@ public class SellerController {
     public Json selectById(SellerUserInfo sellerUserInfo) {
         Json j = new Json();
         j.setSuccess(true);
-        j.setObj(sellerService.selectById(String.valueOf(sellerUserInfo.getId())));
+//        j.setObj(sellerService.selectById(String.valueOf(sellerUserInfo.getId())));
+        SellerUserInfo sellerUserInfo1 =  sellerService.selectById(String.valueOf(sellerUserInfo.getId()));
+        if (null!=sellerUserInfo1.getPhoto()&&!"".equals(sellerUserInfo1.getPhoto())) {
+            String path = pf + sellerUserInfo1.getPhoto().replace("\\\\", "\\\\\\\\");
+            String suffix = path.split("\\.")[1];
+            j.setImgBase64("data:image/" + suffix + ";base64," + ImageUtil2.GetImageStr(path));
+        }
+        j.setObj(sellerUserInfo1);
         return j;
     }
 
@@ -166,10 +177,16 @@ public class SellerController {
                 String uploadPath = upload + "\\";
                 logger.info("uploadPath = " + uploadPath);
                 File uploadfile = new File(uploadPath + newFileName);
+
                 // 将上传文件保存到一个目标文件当中
                 file.transferTo(uploadfile);
                 j.setSuccess(true);
                 j.setObj("/upload/images/" + newFileName);
+
+                String path = pf+("/upload/images/" + newFileName).replace("\\\\","\\\\\\\\");
+                String suffix = path.split("\\.")[1];
+                j.setImgBase64("data:image/"+suffix+";base64,"+ImageUtil2.GetImageStr(path));
+
             } catch (IllegalStateException | IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

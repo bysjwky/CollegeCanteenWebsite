@@ -2,15 +2,19 @@ package com.jiangxiacollege.canteenwebsite.customer.service.db.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jiangxiacollege.canteenwebsite.customer.common.ResponseBase;
 import com.jiangxiacollege.canteenwebsite.customer.mapper.OrderMapper;
+import com.jiangxiacollege.canteenwebsite.customer.mapper.ProductMapper;
 import com.jiangxiacollege.canteenwebsite.customer.service.db.CartService;
 import com.jiangxiacollege.canteenwebsite.customer.service.db.OrderDetailService;
 import com.jiangxiacollege.canteenwebsite.customer.service.db.OrderService;
+import com.jiangxiacollege.canteenwebsite.customer.service.db.ProductService;
 import com.jiangxiacollege.canteenwebsite.customer.table.Comment;
 import com.jiangxiacollege.canteenwebsite.customer.table.Orders;
 import com.jiangxiacollege.canteenwebsite.customer.table.OrderDetail;
+import com.jiangxiacollege.canteenwebsite.customer.table.Product;
 import com.jiangxiacollege.canteenwebsite.customer.vo.CartVo;
 import com.jiangxiacollege.canteenwebsite.customer.vo.OrderDetailVo;
 import com.jiangxiacollege.canteenwebsite.customer.vo.OrderVo;
@@ -32,6 +36,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Orders> implement
 
     @Resource
     private OrderDetailService orderDetailService;
+
+    @Resource
+    private ProductService productService;
 
 
 
@@ -80,7 +87,17 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Orders> implement
         int flag2 = orderDetailService.batchAddOrderDetail(list).getCode();
         if (flag&&flag2==0){
             responseBase.setCode(0);
+            //产品销量更新
+
+            for (OrderDetail od : list ){
+            UpdateWrapper<Product> uw = new UpdateWrapper<>();
+            uw.eq("id",od.getProductId());
+            uw.setSql("sale=sale+"+od.getNumber());
+                productService.update(uw);
+            }
+            //删除购物车
             cartService.removeByIds(cartIdList);
+
         }else {
             responseBase.setCode(1);
             responseBase.setMessage("订单新增错误");

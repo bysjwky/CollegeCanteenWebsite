@@ -49,7 +49,9 @@ $(function(){
 
    </div>
    <div class="RightNav">
-    <a href="../user_center">用户中心</a> <a href="user_orderlist" target="_blank" title="我的订单">我的订单</a> <a href="../cart">购物车（0）</a> <a href="../user_favorites" target="_blank" title="我的收藏">我的收藏</a> <a href="#">商家入驻</a>
+    <a href="../user_center">用户中心</a>
+       <a href="user_orderlist" target="_blank" title="我的订单">我的订单</a>
+       <a href="../cart">购物车</a>
    </div>
   </div>
  </section>
@@ -61,13 +63,12 @@ $(function(){
    <form method="get" id="main_a_serach" onsubmit="return check_search(this)">
    <div class="Search_nav" id="selectsearch">
     <a href="javascript:;" onClick="selectsearch(this,'restaurant_name')" class="choose">餐厅</a>
-    <a href="javascript:;" onClick="selectsearch(this,'food_name')">食物名</a>
    </div>
        <script>
            $(document).ready(function () {
                $("#bt1").click(function(){
                    var keyword =  $("#fkeyword").val();
-                   window.location.href = '../sell/listByKeyWord?fkeyword='+keyword+'';
+                   window.location.href = '../sell/toSellView?fkeyword='+keyword+'';
                });
            })
        </script>
@@ -111,7 +112,7 @@ $(function(){
    <ul class="Tran_infor">
      <li>
       <p class="Numerical" th:text="${product.sale}"></p>
-      <p>月销量</p>
+      <p>销量</p>
      </li>
      <li class="line">
       <p class="Numerical" th:text="${commentCount}"></p>

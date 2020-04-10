@@ -15,18 +15,19 @@ public class OrderVO {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
-    private Long sellerId;
-    private Long customerId;
-    private  Long productId;
-    private  Long addressId;
-
+    private Long seller_id;
+    private Long customer_id;
+    private  Long product_id;
+    private  Long address_id;
     private int  status;
     private BigDecimal money;
     private String pay;
-
-
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Timestamp time;
     private String edit;
+
     private String userId;
+
+    private String name;
+    private String school;
 }

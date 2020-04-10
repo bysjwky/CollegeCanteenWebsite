@@ -2,8 +2,10 @@ package com.jiangxiacollege.canteenwebsite.admin.controller;
 
 
 import com.jiangxiacollege.canteenwebsite.admin.model.Product;
+import com.jiangxiacollege.canteenwebsite.admin.model.ResponseBase;
 import com.jiangxiacollege.canteenwebsite.admin.model.User;
 import com.jiangxiacollege.canteenwebsite.admin.service.ProductService;
+import com.jiangxiacollege.canteenwebsite.admin.util.ImageUtil2;
 import com.jiangxiacollege.canteenwebsite.admin.util.SnowflakeIdWorker;
 import com.jiangxiacollege.canteenwebsite.admin.vo.DataTableResult;
 import com.jiangxiacollege.canteenwebsite.admin.vo.Json;
@@ -19,11 +21,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import sun.misc.BASE64Encoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.List;
 
 @Controller
 @RequestMapping("/ProductController")
@@ -32,6 +38,9 @@ public class ProductController
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private String prefix = "admin/product";// 页面的路径，注意admin前面不要有/
+
+    @Value("${pf}")
+    private String pf;
 
     // 图片存放根路径，从application.yml中读取upload
     @Value("${upload}")
@@ -112,7 +121,11 @@ public class ProductController
         public Json selectById(Product product) {
         Json j = new Json();
         j.setSuccess(true);
-        j.setObj(productService.selectById(product.getId()));
+        Product product1 =  productService.selectById(product.getId());
+        String path = pf+product1.getPhoto().replace("\\\\","\\\\\\\\");
+        String suffix = path.split("\\.")[1];
+        product1.setPhoto("data:image/"+suffix+";base64,"+ImageUtil2.GetImageStr(path));
+        j.setObj(product1);
         return j;
     }
 
@@ -149,10 +162,16 @@ public class ProductController
                 String uploadPath = upload + "\\";
                 logger.info("uploadPath = " + uploadPath);
                 File uploadfile = new File(uploadPath + newFileName);
+
                 // 将上传文件保存到一个目标文件当中
                 file.transferTo(uploadfile);
                 j.setSuccess(true);
                 j.setObj("/upload/images/" + newFileName);
+
+                String path = pf+("/upload/images/" + newFileName).replace("\\\\","\\\\\\\\");
+                String suffix = path.split("\\.")[1];
+                j.setImgBase64("data:image/"+suffix+";base64,"+ImageUtil2.GetImageStr(path));
+
             } catch (IllegalStateException | IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -174,4 +193,15 @@ public class ProductController
         session.removeAttribute("product");
         return "admin/login";
     }
+
+    //数据统计，商家商品销量
+    @RequestMapping("/getAllBySellerId")
+    @ResponseBody
+    public List<Product> getAllBySellerId(HttpServletRequest request) {
+        String sellerId = ((User)request.getSession().getAttribute("user")).getSeller_id();
+        return productService.selectListBySellerId(sellerId);
+
+    }
+
+
 }

@@ -35,8 +35,6 @@
     <a href="../user_center">用户中心</a>
     <a href="user_orderlist" target="_blank" title="我的订单">我的订单</a>
     <a href="../cart">购物车</a>
-    <a href="../user_favorites" target="_blank" title="我的收藏">我的收藏</a>
-    <a href="../register_seller">商家入驻</a>
    </div>
   </div>
  </section>
@@ -49,21 +47,19 @@
    <form method="get" id="main_a_serach" onsubmit="return check_search(this)">
    <div class="Search_nav" id="selectsearch">
     <a href="javascript:;" onClick="selectsearch(this,'restaurant_name')" class="choose">餐厅</a>
-    <a href="javascript:;" onClick="selectsearch(this,'food_name')">食物名</a>
    </div>
        <script>
+
            $(document).ready(function () {
                $("#bt1").click(function(){
                var keyword =  $("#fkeyword").val();
-                   window.location.href = '../sell/listByKeyWord?fkeyword='+keyword+'';
+                   window.location.href = '../sell/toSellView?fkeyword='+keyword+'';
                });
            })
        </script>
    <div class="Search_area" id="dd1">
    <input id="fkeyword" type="search"  name="keyword" placeholder="请输入..." class="searchbox" />
        <input id="bt1"  type="button" class="searchbutton" value="搜 索" />
-<!--       <a id="dd2" class="searchbutton"  href="../sell/listByKeyWord?fkeyword='+keyword+'" >搜索</a>-->
-<!--     <input  type="submit" class="searchbutton" value="搜 索" />-->
    </div>
    </form>
    <p class="hotkeywords">
@@ -86,14 +82,6 @@
 </header>
 <!--Start content-->
 <section class="Cfn">
- <!--<aside class="C-left">
-  <div class="S-time">服务时间：<time>10:00</time>-<time>20:00</time></div>
-  <div class="C-time">
-   <img src="../upload/dc.jpg"/>
-  </div>
-  <a href="../list" target="_blank"><img src="../images/by_button.png"></a>
-  <a href="../list" target="_blank"><img src="../images/dc_button.png"></a>
- </aside>-->
  <div class="F-middle">
  <ul class="rslides f426x240">
         <li><a href="javascript:"><img src="../upload/lb1.jpg" width="870" height="403"/></a></li>
@@ -138,17 +126,18 @@
   <li>
      <div class="SCcontent"  >
          <p th:each="product : ${productList}">
-     <a href="../detailsp?productId='+${productInfo.id}" target="_blank" th:title="${product.name}">
-         <figure>
-       <img th:src="${product.photo}">
-       <figcaption>
-       <span class="title" th:text="${product.name}+'     ￥'+${product.price}"></span>
+          <a href="../detailsp?productId='+${productInfo.id}" target="_blank" th:title="${product.name}">
+           <figure>
+           <img th:src="${product.photo}">
+            <figcaption>
+             <span class="title" th:text="${product.name}+'     ￥'+${product.price}"></span>
      <!--  <span class="price" th:text="${product.price}"><i>￥</i></span>-->
-       </figcaption>
-      </figure>
-      </a>
+            </figcaption>
+            </figure>
+           </a>
          </p>
      </div>
+
      <div class="bestshop">
      <p  th:each="sellerUserInfo : ${sellerList}">
       <a href="'../shop?sellerId='+${sellerUserInfo.id}" target="_blank" th:title="${sellerUserInfo.shopName}">
@@ -158,28 +147,11 @@
       </a>
      </p>
      </div>
-
     </li>
    </ul>
  </div>
  </div>
  </article>
- <!--<aside class="A-infor">
-  <img src="../upload/2014911.jpg">
-  <div class="usercomment">
-   <span>用户菜品点评</span>
-   <ul>
-    <li>
-     <img src="../upload/01.jpg">
-     用户“DeathGhost”对[ 老李川菜馆 ]“酸辣土豆丝”评说：味道挺不错，送餐速度挺快...
-    </li>
-    <li>
-     <img src="../upload/02.jpg">
-     用户“DeathGhost”对[ 魏家凉皮 ]“酸辣土豆丝”评说：味道挺不错，送餐速度挺快...
-    </li>
-   </ul>
-  </div>
- </aside>-->
 </section>
 <!--End content-->
 

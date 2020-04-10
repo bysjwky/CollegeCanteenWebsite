@@ -297,10 +297,11 @@
 					$("#phone").val(data.obj.phone);
 					$("#address").val(data.obj.address);
 					$("#shop_name").val(data.obj.shop_name);
-					$("#shop_type").val(data.shop_type);
-					$("#school").val(data.school);
-					$('#photo').attr("src",data.photo);
-					$("#status").val(data.status);
+					$("#shop_type").val(data.obj.shop_type);
+					$("#school").val(data.obj.school);
+					$("#photo").val(data.obj.photo);
+					$('#photo').attr("src",data.imgBase64);
+					$("#status").val(data.obj.status);
 
 					$("#modaltitle").text("修改");
 					$("#modal").modal("show");
@@ -365,7 +366,7 @@
                      "processing": "正在加载..."
                  },
                  "autoWidth": false,
-                 "pageLength": 5,
+                 "pageLength": 10,
                  "lengthChange": false,
                  "searching": false,
                  "columns": [
@@ -392,9 +393,7 @@
 						}else {
 							return "未通过";
 						}
-
 						  }},
-
  					//有排序功能必须指定name为字段名称
  					{"data":"id","orderable": false,
  						"render": function ( data, type, full, meta ) {
@@ -477,6 +476,7 @@
 				$("#shop_name").val("");
 				$("#shop_type").val("");
 				$("#school").val("");
+				$('#photo').val("");
 				$('#photo').attr("src","");
 				 $("#status").val("");
 
@@ -554,7 +554,7 @@
 								shop_name:$("#shop_name").val(),
 								shop_type:$("#shop_type").val(),
 								school:$("#school").val(),
-								photo:$('#photo').attr("src"),
+								photo:$('#photo').val(),
 						      status:$("#status").val(),
 
                     		},
@@ -583,7 +583,7 @@
 								shop_name:$("#shop_name").val(),
 								shop_type:$("#shop_type").val(),
 								school:$("#school").val(),
-								photo:$('#photo').attr("src"),
+								photo:$('#photo').val(),
 								status:$("#status").val(),
                     		},
                     		url: "/SellerUserInfoController/update",//后台处理地址
@@ -636,7 +636,9 @@
         	          console.log("success");
         	          console.log(data);
         	          if(data.success){
-        	        	  $('#photo').attr("src", data.obj);
+        	        	  // $('#photo').attr("src", data.obj);
+						  $("#photo").val(data.obj);
+						  $('#photo').attr("src", data.imgBase64);
         	        	  toastr.success("上传成功！", '成功');
         	        	  myDropzone.removeFile(file);//上传界面的预览删除
         	          }
@@ -653,34 +655,7 @@
         	      },
         	 });// end Dropzone
         	 
-        	/* $("#btn_rolesave").click(function(){
-        		 var treeObj = $.fn.zTree.getZTreeObj("tree");
-            	 var nodes = treeObj.getCheckedNodes(true);
-            	 ids="";
-            	 for(i=0;i<nodes.length;i++){
-            		 if(i<nodes.length - 1){
-            			 ids = ids + nodes[i].id + ",";
-            		 }else{
-            			 ids = ids + nodes[i].id;
-            		 }            		 
-            	 }            	 
-            	 //console.log(ids);
-            	 $.ajax({
-             		type: "post",
-             		data: {
-             		   id:$("#userid").val(),
-             		   ids:ids
-             		},
-             		url: "/RoleController/role",//后台处理地址
-             		success: function (data) {
-             			if(data.success){
-          	        	  toastr.success("分配角色成功！", '成功');
-          	        	  $("#rolemodal").modal("hide");
-          	            }
-             		}
-             	}); // end ajax
-            
-        	 });//end rolesave*/
+        	
         	 
         });//end ready
     </script>

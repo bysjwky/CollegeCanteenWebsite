@@ -137,7 +137,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label"><font color="#FF0000">*</font>商品名称：</label>
+                                <label class="col-sm-3 control-label">商品名称：</label>
                                 <div class="col-sm-3">
                                     <input  class="form-control" type="text" name="name" id="name">
                                     <span class="help-block m-b-none"></span>
@@ -170,18 +170,18 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">图片：</label>
-                                <div class="col-sm-3">
-                                    <img alt="image" id="photo" style="width: 200px; " class="img-rounded" th:src="@{/static/img/a7.jpg}">
-                                </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">图片：</label>
+                            <div class="col-sm-3">
+                                <img alt="image" id="photo" style="width: 200px; " class="img-rounded" >
                             </div>
                         </div>
+                    </div>
                         <div class="col-md-12">
                             <div id="fileupload" class="dropzone">
                             </div>
                         </div>
-                        <div class="col-md-12">
+                       <!-- <div class="col-md-12">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">销量：</label>
                                 <div class="col-sm-3">
@@ -189,7 +189,7 @@
                                     <span class="help-block m-b-none"></span>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">备注编辑：</label>
@@ -274,7 +274,7 @@
                     $("#name").val(data.obj.name);
                     $("#price").val(data.obj.price);
                     $("#type").val(data.obj.type);
-                    $("#photo").val(data.obj.photo);
+                    $('#photo').attr("src", data.obj.photo);
                     $("#sale").val(data.obj.sale);
                     $("#edit").val(data.obj.edit);
 
@@ -290,7 +290,7 @@
     }//end edit
 
     //表格行中的按钮点击事件
-   function role(id){
+   /*function role(id){
         //异步获取数据
         $.ajax({
             type: "get",
@@ -316,7 +316,7 @@
             }
         }); // end ajax
 
-    }
+    }*/
 
     $(document).ready(function () {
         //datatable
@@ -592,8 +592,9 @@
                     console.log("success");
                     console.log(data);
                     if(data.success){
-                        $('#photo').attr("src", data.obj);
-                        toastr.success("上传头像成功！", '成功');
+                        $("#photo").val(data.obj);
+                        $('#photo').attr("src", data.imgBase64);
+                        toastr.success("上传成功！", '成功');
                         myDropzone.removeFile(file);//上传界面的预览删除
                     }
 

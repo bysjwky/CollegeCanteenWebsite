@@ -73,15 +73,15 @@ public class SellerService {
     }
 
     //对于执行数据修改的方法加上事务处理
-   /* @Transactional
+    @Transactional
     public int insert(SellerUserInfo sellerUserInfo) {
         //添加雪花主键id
         sellerUserInfo.setId(Long.parseLong(SnowflakeIdWorker.getUUID()));
-        int n = sellerUserInfoMapper.insert(sellerUserInfo);
+        int n = sellerMapper.insert(sellerUserInfo);
         //密码安全一点的话，不能原文保存，应该用MD5，也可以加盐处理
 //		n=1/0; //事务测试
         return n;
-    }*/
+    }
 
     public List<SellerUserInfo> selectList(String user_name) {
         EntityWrapper<SellerUserInfo> wrapper = new EntityWrapper<SellerUserInfo>();

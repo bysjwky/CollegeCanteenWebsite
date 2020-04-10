@@ -14,3 +14,4 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印SQL日志，便于调试
 upload: C:/upload/ #自定义文件上传路径
+pf: C:/

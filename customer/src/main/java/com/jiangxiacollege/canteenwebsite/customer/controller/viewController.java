@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class viewController {
 
 
+/*
 
     @RequestMapping( "/article_list")
     public String articleList(){
         return "article_list";
     }
+*/
 
     @RequestMapping( "/article_read")
     public String articleRead(){
@@ -26,10 +28,10 @@ public class viewController {
 //        return "cart";
 //    }
 
-    @RequestMapping( "/category")
+   /* @RequestMapping( "/category")
     public String category(){
         return "category";
-    }
+    }*/
 
 /*    @RequestMapping( "/confirm_order")
     public String confirmOrder(){
@@ -45,22 +47,24 @@ public class viewController {
     public String list(){
         return "list";
     }*/
+/*
 
     @RequestMapping( "/reserve")
     public String reserve(){
         return "reserve";
     }
+*/
 
-    @RequestMapping( "/respond")
+    /*@RequestMapping( "/respond")
     public String respond(){
         return "respond";
-    }
+    }*/
 
-    @RequestMapping( "/search_p")
+  /*  @RequestMapping( "/search_p")
     public String search_p(){
         return "search_p";
     }
-
+*/
     @RequestMapping( "/search_s")
     public String search_s(){
         return "search_s";
@@ -101,11 +105,11 @@ public class viewController {
         return "user_favorites";
     }
 
-    @RequestMapping( "/user_message")
+   /* @RequestMapping( "/user_message")
     public String userMessage(){
         return "user_message";
     }
-
+*/
 //    @RequestMapping( "/user_order")
 //    public String userOrder(){
 //        return "user_order";

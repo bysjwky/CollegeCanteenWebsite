@@ -22,6 +22,16 @@ public class Json implements Serializable{
 
 	private Object obj = null;
 
+	public Object getImgBase64() {
+		return imgBase64;
+	}
+
+	public void setImgBase64(Object imgBase64) {
+		this.imgBase64 = imgBase64;
+	}
+
+	private Object imgBase64 = null;
+
 	public Integer getCode() {
 		return code;
 	}

@@ -192,6 +192,9 @@ public class UserController {
 				UserRole userRole = roleService.getOne(loginUser.getId());
 				session.setAttribute("user", loginUser);// 保存session会话
 				session.setAttribute("roleId",userRole.getSys_role_id());
+				//setAttribute("user",);
+//				session.getAttribute("user").getSeller_id;
+
 			} else {
 				j.setSuccess(false);
 				j.setMsg("登录失败！");

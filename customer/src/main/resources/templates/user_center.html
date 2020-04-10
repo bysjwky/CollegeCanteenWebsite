@@ -29,7 +29,9 @@
        <div id="d1"><a href="../login/register">注册</a>/<a href="../login/login">登录</a></div><div id="d2"></div>
    </div>
    <div class="RightNav">
-    <a href="../user_center">用户中心</a> <a href="user_orderlist" target="_blank" title="我的订单">我的订单</a> <a href="../cart">购物车（0）</a> <a href="../user_favorites" target="_blank" title="我的收藏">我的收藏</a> <a href="#">商家入驻</a>
+    <a href="../user_center">用户中心</a>
+       <a href="user_orderlist" target="_blank" title="我的订单">我的订单</a>
+       <a href="../cart">购物车</a>
    </div>
   </div>
  </section>
@@ -41,13 +43,12 @@
    <form method="get" id="main_a_serach" onsubmit="return check_search(this)">
    <div class="Search_nav" id="selectsearch">
     <a href="javascript:;" onClick="selectsearch(this,'restaurant_name')" class="choose">餐厅</a>
-    <a href="javascript:;" onClick="selectsearch(this,'food_name')">食物名</a>
    </div>
        <script>
            $(document).ready(function () {
                $("#bt1").click(function(){
                    var keyword =  $("#fkeyword").val();
-                   window.location.href = '../sell/listByKeyWord?fkeyword='+keyword+'';
+                   window.location.href = '../sell/toSellView?fkeyword='+keyword+'';
                });
            })
        </script>
@@ -74,9 +75,6 @@
    <li><i></i><a href="../user_center">用户中心首页</a></li>
    <li><i></i><a href="user_orderlist">我的订单</a></li>
    <li><i></i><a href="../user_address">收货地址</a></li>
-<!--      th:href="'../user_address?customerId='+${address.customerId}"-->
-<!--   <li><i></i><a href="../user_message">我的留言</a></li>-->
-<!--   <li><i></i><a href="../user_coupon">我的优惠券</a></li>-->
    <li><i></i><a href="../user_favorites">我的收藏</a></li>
    <li><i></i><a href="../user_account">账户管理</a></li>
    <li><i></i><a href="#">安全退出</a></li>
@@ -92,16 +90,7 @@
    <div class="U-header MT20 Overflow">
 <!--    <img src="../upload/testuser.jpg">-->
     <p class="Font14 FontW"> 欢迎您回到 用户中心！</p>
-<!--    <p class="Font12">您的上一次登录时间:<time> 2016-05-18 14:20:04</time></p>-->
-<!--    <p class="Font12 CorRed FontW">我的优惠券( 0 ) | 我的积分( 0 )</p>-->
    </div>
-    <!--<ul class="s-States Overflow FontW" id="Lbn">
-     <li class="Font14 FontW">业务在线提醒：</li>
-     <li><a href="#">待付款( 0 )</a></li>
-     <li><a href="#">待发货( 0 )</a></li>
-     <li><a href="#">待收货( 0 )</a></li>
-     <li><a href="#">待评价( 0 )</a></li>
-    </ul>-->
   </section>
  </article>
 </section>

@@ -29,7 +29,9 @@
     <div id="d1"><a href="../login/register">注册</a>/<a href="../login/login">登录</a></div><div id="d2"></div>
    </div>
    <div class="RightNav">
-    <a href="../user_center">用户中心</a> <a href="user_orderlist" target="_blank" title="我的订单">我的订单</a> <a href="../cart">购物车（0）</a> <a href="../user_favorites" target="_blank" title="我的收藏">我的收藏</a> <a href="#">商家入驻</a>
+    <a href="../user_center">用户中心</a>
+    <a href="user_orderlist" target="_blank" title="我的订单">我的订单</a>
+    <a href="../cart">购物车</a>
    </div>
   </div>
  </section>
@@ -41,22 +43,18 @@
    <form method="get" id="main_a_serach" onsubmit="return check_search(this)">
    <div class="Search_nav" id="selectsearch">
     <a href="javascript:;" onClick="selectsearch(this,'restaurant_name')" class="choose">餐厅</a>
-    <a href="javascript:;" onClick="selectsearch(this,'food_name')">食物名</a>
    </div>
     <script>
      $(document).ready(function () {
       $("#bt1").click(function(){
        var keyword =  $("#fkeyword").val();
-       window.location.href = '../sell/listByKeyWord?fkeyword='+keyword+'';
+       window.location.href = '../sell/toSellView?fkeyword='+keyword+'';
       });
      })
     </script>
     <div class="Search_area" id="dd1">
      <input id="fkeyword" type="search"  name="keyword" placeholder="请输入..." class="searchbox" />
      <input id="bt1"  type="button" class="searchbutton" value="搜 索" />
-   <!--<div class="Search_area">
-   <input type="search" id="fkeyword" name="keyword" placeholder="请输入您所需查找的餐厅名称或食物名称..." class="searchbox" />
-   <input type="submit" class="searchbutton" value="搜 索" />-->
    </div>
    </form>
    <p class="hotkeywords"><a href="#" title="酸辣土豆丝">酸辣土豆丝</a><a href="#" title="这里是产品名称">螃蟹炒年糕</a><a href="#" title="这里是产品名称">牛奶炖蛋</a><a href="#" title="这里是产品名称">芝麻酱凉面</a><a href="#" title="这里是产品名称">滑蛋虾仁</a><a href="#" title="这里是产品名称">蒜汁茄子</a></p>
@@ -77,8 +75,6 @@
    <li><i></i><a href="../user_center">用户中心首页</a></li>
    <li><i></i><a href="user_orderlist">我的订单</a></li>
    <li><i></i><a href="../user_address">收货地址</a></li>
-<!--   <li><i></i><a href="../user_message">我的留言</a></li>-->
-<!--   <li><i></i><a href="../user_coupon">我的优惠券</a></li>-->
    <li><i></i><a href="../user_favorites">我的收藏</a></li>
    <li><i></i><a href="../user_account">账户管理</a></li>
    <li><a href="#">安全退出</a></li>
@@ -91,15 +87,8 @@
   <!--user Account-->
   <section class="AccManage Overflow">
    <span class="AMTitle Block Font14 FontW Lineheight35">账户管理</span>
-   <!--<p>登陆邮箱：232***413@qq.com ( <a href="#" target="_blank">更换手机号码</a> )</p>
-   <p>手机号码：183****5673 ( <a href="#" target="_blank">更换手机号码</a> ) ( <a href="#" target="_blank">解绑手机</a> )</p>
-   <p>上次登陆：2014年09月22日 11:40:36( *如非本人登陆，请立即<a href="#" target="_blank">修改您的密码</a>！ )</p>-->
    <form>
     <table>
-    <!--<tr>
-    <td width="30%" align="right">*修改头像：</td>
-    <td><input name="" type="file"><button>确定</button></td>
-    </tr>-->
     <tr>
     <td width="30%" align="right">用户名：</td>
     <td><input type="text" name="" th:value="${customerUserInfo.userName}" readonly ></td>

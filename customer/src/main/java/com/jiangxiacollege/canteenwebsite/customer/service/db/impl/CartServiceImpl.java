@@ -8,7 +8,10 @@ import com.jiangxiacollege.canteenwebsite.customer.common.ResponseBase;
 import com.jiangxiacollege.canteenwebsite.customer.mapper.CartMapper;
 import com.jiangxiacollege.canteenwebsite.customer.service.db.CartService;
 import com.jiangxiacollege.canteenwebsite.customer.table.Cart;
+import com.jiangxiacollege.canteenwebsite.customer.table.SellerUserInfo;
+import com.jiangxiacollege.canteenwebsite.customer.utils.ImageUtil2;
 import com.jiangxiacollege.canteenwebsite.customer.vo.CartVo;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +24,8 @@ import java.util.Map;
 public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements CartService {
 
 
+    @Value("${pf}")
+    private String pf;
     @Override
     public ResponseBase cartList(String customerId) {
         ResponseBase responseBase = new ResponseBase();
@@ -30,6 +35,11 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements Ca
                 BigDecimal totalPrice = cartVo.getPrice().multiply(new BigDecimal(cartVo.getNumber()));
                 cartVo.setTotalPrice(totalPrice);
             }*/
+            for(CartVo cartVo : list){
+                String path = pf+cartVo.getPhoto().replace("\\\\","\\\\\\\\");
+                String suffix = path.split("\\.")[1];
+                cartVo.setPhoto("data:image/"+suffix+";base64,"+ ImageUtil2.GetImageStr(path));
+            }
             responseBase.setData(list);
 
         }catch (Exception e){

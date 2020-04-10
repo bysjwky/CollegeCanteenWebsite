@@ -92,7 +92,6 @@
                                 <input type="checkbox" id="cb_selectAll" class="input-lg" style="width:20px;height:20px;"/>
                             </th>
                             <th>id</th>
-
                             <th>姓名</th>
                             <th>密码</th>
                             <th>手机</th>
@@ -140,7 +139,7 @@
 
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label"><font color="#FF0000">*</font>姓名：</label>
+                                <label class="col-sm-3 control-label">姓名：</label>
                                 <div class="col-sm-3">
                                     <input type="hidden" name="id" id="id">
                                     <input  class="form-control" type="text" name="user_name" id="user_name"
@@ -152,7 +151,7 @@
 
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label"><font color="#FF0000">*</font>密码：</label>
+                                <label class="col-sm-3 control-label">密码：</label>
                                 <div class="col-sm-3">
                                     <input  class="form-control" type="password" name="password" id="password"
                                     >
@@ -216,38 +215,7 @@
 <!-- 模态窗口结束 -->
 
 
-<!-- 分配角色模态窗口 -->
-<!-- <div class="modal fade" data-backdrop="static" id="rolemodal" tabindex="-1" role="dialog" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">
-					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-				</button>
-				<h2 class="modal-title" id="rolemodaltitle">分配角色</h2>
-			</div>
-			<div class="modal-body">
-				<div class="row">
-					表单布局
-					<form id="roleform">
-							<div class="col-md-12">
-							保存修改的主键值
-						    <input type="hidden" name="userid" id="userid">
-						    <ul id="tree" class="ztree"></ul>
-							</div>
-					</form>
-					表单布局结束
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-white"
-					data-dismiss="modal">关闭</button>
-				<button type="button" class="btn btn-primary" id="btn_rolesave">保存</button>
-			</div>
-		</div>
-	</div>
-</div> -->
-<!-- 模态窗口结束 -->
+
 
 <!-- 全局js -->
 <script th:src="@{/static/js/jquery.min.js?v=2.1.4}"></script>
@@ -324,7 +292,7 @@
     }//end edit
 
     //表格行中的按钮点击事件
-    function role(id){
+   /* function role(id){
         //异步获取数据
         $.ajax({
             type: "get",
@@ -350,7 +318,7 @@
             }
         }); // end ajax
 
-    }
+    }*/
 
     $(document).ready(function () {
         //datatable

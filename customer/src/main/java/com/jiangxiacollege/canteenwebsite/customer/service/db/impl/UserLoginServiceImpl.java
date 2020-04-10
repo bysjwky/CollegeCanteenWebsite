@@ -55,7 +55,7 @@ public class UserLoginServiceImpl extends ServiceImpl<UserLoginMapper, CustomerU
             CustomerUserInfo  result = this.getOne(lqw);
             if (result==null){
                 responseBase.setCode(1);
-                responseBase.setMessage("用户名密码错误");
+                responseBase.setMessage("用户名或密码错误");
                 return responseBase;
             }
             responseBase.setCode(0);

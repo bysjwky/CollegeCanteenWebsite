@@ -2,13 +2,11 @@ package com.jiangxiacollege.canteenwebsite.admin.controller;
 
 
 import com.jiangxiacollege.canteenwebsite.admin.model.Order;
+import com.jiangxiacollege.canteenwebsite.admin.model.Product;
 import com.jiangxiacollege.canteenwebsite.admin.model.SellerUserInfo;
 import com.jiangxiacollege.canteenwebsite.admin.model.User;
 import com.jiangxiacollege.canteenwebsite.admin.service.OrderService;
-import com.jiangxiacollege.canteenwebsite.admin.vo.DataTableResult;
-import com.jiangxiacollege.canteenwebsite.admin.vo.Json;
-import com.jiangxiacollege.canteenwebsite.admin.vo.OrderDetailVo;
-import com.jiangxiacollege.canteenwebsite.admin.vo.OrderVO;
+import com.jiangxiacollege.canteenwebsite.admin.vo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,10 +47,10 @@ public class OrderController {
     public DataTableResult list(HttpServletRequest request, OrderVO orderVO) {
         // DataTableResult返回给datatables控件的数据格式
         int roleId = Integer.parseInt(String.valueOf(request.getSession().getAttribute("roleId")));
-        String userId = ((User)request.getSession().getAttribute("user")).getId();
-        if(roleId ==1){
+        String userId = ((User) request.getSession().getAttribute("user")).getId();
+        if (roleId == 1) {
             orderVO.setUserId("");
-        }else if(roleId ==3){
+        } else if (roleId == 3) {
             orderVO.setUserId(userId);
         }
         DataTableResult result = new DataTableResult();
@@ -70,6 +68,7 @@ public class OrderController {
 //		result.setDraw(noticeVO.getDraw());
         return result;
     }
+
     // @ResponseBody，直接通过js异步返回数据给页面
     @RequestMapping("insert")
     @ResponseBody
@@ -90,7 +89,7 @@ public class OrderController {
     @ResponseBody
     public Json updateById(Order order) {
         Json j = new Json();
-        if ( orderService.updateById( order) > 0) {
+        if (orderService.updateById(order) > 0) {
             j.setSuccess(true);
             j.setMsg("修改成功！");
         } else {
@@ -130,11 +129,10 @@ public class OrderController {
 
     /**
      * 注销
-
      */
     // 未加入@ResponseBody用来返回数据给页面
     @RequestMapping("logout")
-    public String logout(HttpServletRequest request,Model model) {
+    public String logout(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         session.removeAttribute("order");
         return "admin/login";
@@ -142,7 +140,7 @@ public class OrderController {
 
     @RequestMapping("/orderDetail")
     @ResponseBody
-    public Json orderDetail(HttpServletRequest request){
+    public Json orderDetail(HttpServletRequest request) {
         Json j = new Json();
         String orderId = request.getParameter("orderId");
         List<OrderDetailVo> list = (List<OrderDetailVo>) orderService.orderDetail(orderId).getData();
@@ -156,9 +154,27 @@ public class OrderController {
         return j;
 
     }
+
+    //发货
     @RequestMapping("send")
     @ResponseBody
     public Json sendById(Order order) {
-        return  orderService.sendById(order);
+        return orderService.sendById(order);
     }
+
+    @RequestMapping("/countCustomerBySellerId")
+    @ResponseBody
+    public List<OrderCountVO> countCustomerBySellerId(HttpServletRequest request) {
+        String sellerId = ((User) request.getSession().getAttribute("user")).getSeller_id();
+        return orderService.countCustomerBySellerId(sellerId);
+    }
+
+    @RequestMapping("/countSchoolBySellerId")
+    @ResponseBody
+    public List<OrderCountVO> countSchoolBySellerId(HttpServletRequest request) {
+        String sellerId = ((User) request.getSession().getAttribute("user")).getSeller_id();
+        return orderService.countSchoolBySellerId(sellerId);
+    }
+
+
 }

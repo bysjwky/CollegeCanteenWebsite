@@ -60,10 +60,16 @@ public class ProductService {
         wrapper.like("seller_id", seller_id);
         return productMapper.selectList(wrapper);
     }
+//商家销量统计
+    public List<Product> selectListBySellerId(String sellerId) {
+        EntityWrapper<Product> wrapper =new EntityWrapper<Product>();
+        wrapper.eq("seller_id", sellerId);
+        return productMapper.selectList(wrapper);
+    }
 
     /**
      * 分页查询
-     * @param user
+     * @param
      * @return
      */
     public DataTableResult selectProductListPage(ProductVO productVO, int start, int length, String orderField, String orderDir) {

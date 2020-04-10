@@ -34,7 +34,7 @@ public class WebConfig implements WebMvcConfigurer {
         //登录拦截的管理器
         InterceptorRegistration registration = registry.addInterceptor(loginInterceptor);//拦截的对象会进入这个类中进行判断
         registration.addPathPatterns("/**");//所有路径都被拦截
-        registration.excludePathPatterns("/","/login","/UserController/login","/kaptcha","/static/**","/UserController/logout","/upload/**","/register/**","/doRegister/**");//添加不拦截路径
+        registration.excludePathPatterns("/","/login","/UserController/login","/kaptcha","/static/**","/UserController/logout","/images/**","/upload/**","/register/**","/doRegister/**");//添加不拦截路径
     }
 
 }

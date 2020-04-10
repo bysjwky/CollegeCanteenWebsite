@@ -3,7 +3,7 @@
 
 <head>
 <meta charset="utf-8" />
-<title>点餐产品分类页面</title>
+<title>点餐产品页面</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <meta name="author" content=""/>
@@ -33,9 +33,7 @@
    <div class="RightNav">
     <a href="../user_center">用户中心</a>
     <a href="user_orderlist" target="_blank" title="我的订单">我的订单</a>
-    <a href="../cart">购物车（0）</a>
-    <a href="../user_favorites" target="_blank" title="我的收藏">我的收藏</a>
-    <a href="#">商家入驻</a>
+    <a href="../cart">购物车</a>
    </div>
   </div>
  </section>
@@ -48,13 +46,12 @@
    <form method="get" id="main_a_serach" onsubmit="return check_search(this)">
    <div class="Search_nav" id="selectsearch">
     <a href="javascript:;" onClick="selectsearch(this,'restaurant_name')" class="choose">餐厅</a>
-    <a href="javascript:;" onClick="selectsearch(this,'food_name')">食物名</a>
    </div>
     <script>
      $(document).ready(function () {
       $("#bt1").click(function(){
        var keyword =  $("#fkeyword").val();
-       window.location.href = '../sell/listByKeyWord?fkeyword='+keyword+'';
+       window.location.href = '../sell/toSellView?fkeyword='+keyword+'';
       });
      })
     </script>
@@ -132,7 +129,6 @@
 <section class="Fsl">
  <ul >
   <li th:each="sellerUserInfo : ${sellerLists}">
-<!--   <div >-->
    <a th:href="'../shop?sellerId='+${sellerUserInfo.id}" target="_blank" th:title="${sellerUserInfo.shopName}">
     <img th:src="${sellerUserInfo.photo}"></a>
    <hgroup>
@@ -143,7 +139,6 @@
    <p>
     <span class="DSBUTTON"><a th:href="'../shop?sellerId='+${sellerUserInfo.id}" target="_blank" class="Fontfff">点外卖</a></span>
    </p>
-<!--  </div>-->
   </li>
  </ul>
  <!--<div class="TurnPage">
@@ -156,8 +151,9 @@
   <span class="Next">最后一页<i></i></span>
   </a>
  </div>-->
-<!--</section>-->
 </section>
+</section>
+
 <!--End content-->
 <footer>
  <section class="Otherlink">
@@ -205,7 +201,6 @@
     </div>
   </section>
  </section>
-<div class="copyright">© 版权所有 2016 DeathGhost 技术支持：<a href="http://www.deathghost.cn" title="DeathGhost">DeathGhost</a></div>
 </footer>
 </body>
 </html>

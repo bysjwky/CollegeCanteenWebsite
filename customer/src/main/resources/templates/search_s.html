@@ -25,11 +25,21 @@
      }
     });
    </script>
+   <script>
+    $(document).ready(function () {
+     $("#bt1").click(function(){
+      var keyword =  $("#fkeyword").val();
+      window.location.href = '../sell/toSellView?fkeyword='+keyword+'';
+     });
+    })
+   </script>
    <div class="LeftNav">
     <div id="d1"><a href="../login/register">注册</a>/<a href="../login/login">登录</a></div><div id="d2"></div>
    </div>
    <div class="RightNav">
-    <a href="../user_center">用户中心</a> <a href="user_orderlist" target="_blank" title="我的订单">我的订单</a> <a href="../cart">购物车（0）</a> <a href="../user_favorites" target="_blank" title="我的收藏">我的收藏</a> <a href="#">商家入驻</a>
+    <a href="../user_center">用户中心</a>
+    <a href="user_orderlist" target="_blank" title="我的订单">我的订单</a>
+    <a href="../cart">购物车</a>
    </div>
   </div>
  </section>
@@ -41,22 +51,55 @@
    <form method="get" id="main_a_serach" onsubmit="return check_search(this)">
    <div class="Search_nav" id="selectsearch">
     <a href="javascript:;" onClick="selectsearch(this,'restaurant_name')" class="choose">餐厅</a>
-    <a href="javascript:;" onClick="selectsearch(this,'food_name')">食物名</a>
    </div>
     <script>
+     var sellList = [];
+     function getQueryVariable(variable)
+     {
+      var query = window.location.search.substring(1);
+      var vars = query.split("&");
+      for (var i=0;i<vars.length;i++) {
+       var pair = vars[i].split("=");
+       if(pair[0] == variable){return pair[1];}
+      }
+      return(false);
+     }
+
      $(document).ready(function () {
-      $("#bt1").click(function(){
-       var keyword =  $("#fkeyword").val();
-       window.location.href = '../sell/listByKeyWord?fkeyword='+keyword+'';
-      });
+
+       var keyword =  getQueryVariable("fkeyword");
+
+      $.ajax({
+        type: "post",
+       contenType: "application/json",
+       dataType: "json",
+        data:JSON.stringify( {
+         keyword:keyword
+        }),
+        url: "/sell/listByKeyWord",//后台处理地址
+        success: function (data) {
+         //console.log(data);
+         if(data.code==0){
+          sellList = data.data;
+          for (var i = 0 ; i<sellList.length;i++){
+           $("#sellListId").append(' <li>\n' +
+                   '   <a href="../shop?sellerId='+sellList[i].id+'" target="_blank" title="'+sellList[i].shopName+'"><img src="'+sellList[i].photo+'"></a>\n' +
+                   '   <p class="P-shop Overflow"><span class="sa"><a href="../shop?sellerId='+sellList[i].id+'" target="_blank" title="'+sellList[i].shopName+'" >'+sellList[i].shopName+'</a></span></p>\n' +
+                   '   <p class="P-shop Overflow" >'+sellList[i].address+'</p>\n' +
+                   '  </li>')
+          }
+
+         }else{
+
+         }
+        }
+       });
+
      })
     </script>
     <div class="Search_area" id="dd1">
      <input id="fkeyword" type="search"  name="keyword" placeholder="请输入..." class="searchbox" />
      <input id="bt1"  type="button" class="searchbutton" value="搜 索" />
-   <!--<div class="Search_area">
-   <input type="search" id="fkeyword" name="keyword" placeholder="请输入您所需查找的餐厅名称或食物名称..." class="searchbox" />
-   <input type="submit" class="searchbutton" value="搜 索" />-->
    </div>
    </form>
    <p class="hotkeywords"><a href="#" title="酸辣土豆丝">酸辣土豆丝</a><a href="#" title="这里是产品名称">螃蟹炒年糕</a><a href="#" title="这里是产品名称">牛奶炖蛋</a><a href="#" title="这里是产品名称">芝麻酱凉面</a><a href="#" title="这里是产品名称">滑蛋虾仁</a><a href="#" title="这里是产品名称">蒜汁茄子</a></p>
@@ -73,12 +116,8 @@
 <!--Start content-->
 <section class="Psection MT20">
  <article class="Searchlist Overflow">
-  <ul class="Overflow">
-    <li th:each="sell: ${sellList}">
-    <a th:href="'../shop?sellId='+${sell.id}" target="_blank" th:title="${sell.shopName}"><img th:src="'../'+${sell.photo}"></a>
-    <p class="P-shop Overflow"><span class="sa"><a th:href="'../shop?sellId='+${sell.id}" target="_blank" th:title="${sell.shopName}" th:text="${sell.shopName}"></a></span></p>
-    <p class="P-shop Overflow" th:text="${sell.address}"></p>
-    </li>
+  <ul class="Overflow" id="sellListId">
+
   </ul>
   <div class="TurnPage">
   <a href="#">
@@ -99,7 +138,6 @@
     <a href="../shop" title="好味来快餐店" target="_blank"><img src="../upload/cc.jpg"></a>
     <p>
      <span class="Block FontW Font14"><a href="../detailsp" title="KFC" target="_blank" class="CorRed">KFC</a></span>
-<!--     <span class="Block Overflow">西安 · 莲湖区</span>-->
      <span class="Block Overflow">福建江夏学院对面...</span>
     </p>
    </li>
