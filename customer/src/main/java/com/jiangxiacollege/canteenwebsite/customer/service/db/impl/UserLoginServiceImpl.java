@@ -50,8 +50,8 @@ public class UserLoginServiceImpl extends ServiceImpl<UserLoginMapper, CustomerU
         ResponseBase responseBase = new ResponseBase();
         try {
             LambdaQueryWrapper<CustomerUserInfo> lqw = new  QueryWrapper().lambda();
-            lqw.eq(!StringUtils.isEmpty(customerUserInfo.getUserName()),CustomerUserInfo::getUserName,customerUserInfo.getUserName());
-            lqw.eq(!StringUtils.isEmpty(customerUserInfo.getPassword()),CustomerUserInfo::getPassword,MD5Tools.getMD5(customerUserInfo.getPassword()));
+            lqw.eq(CustomerUserInfo::getUserName,customerUserInfo.getUserName());
+            lqw.eq(CustomerUserInfo::getPassword,MD5Tools.getMD5(customerUserInfo.getPassword()));
             CustomerUserInfo  result = this.getOne(lqw);
             if (result==null){
                 responseBase.setCode(1);

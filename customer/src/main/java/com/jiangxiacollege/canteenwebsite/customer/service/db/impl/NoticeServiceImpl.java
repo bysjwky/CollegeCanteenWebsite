@@ -8,6 +8,7 @@ import com.jiangxiacollege.canteenwebsite.customer.common.ResponseBase;
 import com.jiangxiacollege.canteenwebsite.customer.mapper.NoticeMapper;
 import com.jiangxiacollege.canteenwebsite.customer.service.db.NoticeService;
 import com.jiangxiacollege.canteenwebsite.customer.table.Notice;
+import com.jiangxiacollege.canteenwebsite.customer.table.SellerUserInfo;
 import org.springframework.stereotype.Service;
 
 
@@ -23,7 +24,8 @@ public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice> impleme
         ResponseBase responseBase=new ResponseBase();
         try {
             LambdaQueryWrapper<Notice> gg=new QueryWrapper().lambda();
-          gg.in(Notice::getId,new Integer[]{0, 1,2,3,4,5,6,7});
+            gg.isNotNull(Notice::getId);
+        //  gg.in(Notice::getId,new Integer[]{0, 1,2,3,4,5,6,7});
             List<Notice> list=this.list(gg);
             responseBase.setData(list);
 

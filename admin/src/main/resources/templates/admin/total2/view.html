@@ -73,6 +73,9 @@
     var app1 = {};
     option1 = null;
     option1 = {
+        title: {
+            text: '顾客下单统计'
+        },
         color: ['#3398DB'],
         tooltip: {
             trigger: 'axis',
@@ -102,7 +105,7 @@
         ],
         series: [
             {
-                name: '直接访问',
+                name: '下单次数',
                 type: 'bar',
                 barWidth: '60%',
                 data: num
@@ -145,7 +148,7 @@
     option = null;
     option = {
         title: {
-            text: '学校',
+            text: '顾客学校分布',
             // subtext: '纯属虚构',
             left: 'left'
         },

@@ -46,13 +46,17 @@ public class OrderController {
     @ResponseBody
     public DataTableResult list(HttpServletRequest request, OrderVO orderVO) {
         // DataTableResult返回给datatables控件的数据格式
+
+        //登录指定
         int roleId = Integer.parseInt(String.valueOf(request.getSession().getAttribute("roleId")));
         String userId = ((User) request.getSession().getAttribute("user")).getId();
+        String sellerId = ((User)request.getSession().getAttribute("user")).getSeller_id();
         if (roleId == 1) {
             orderVO.setUserId("");
         } else if (roleId == 3) {
-            orderVO.setUserId(userId);
+            orderVO.setUserId(sellerId);
         }
+
         DataTableResult result = new DataTableResult();
         // 获取分页参数
         int start = Integer.parseInt(request.getParameter("start"));

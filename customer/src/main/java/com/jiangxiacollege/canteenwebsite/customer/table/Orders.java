@@ -21,9 +21,12 @@ public class Orders implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long sellerId;
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long customerId;
 
+    @JsonSerialize(using = ToStringSerializer.class)
     private  Long addressId;
 
     private int  status;

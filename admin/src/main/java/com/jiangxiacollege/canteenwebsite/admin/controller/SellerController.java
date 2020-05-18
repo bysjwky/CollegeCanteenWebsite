@@ -64,6 +64,7 @@ public class SellerController {
     @ResponseBody
     public DataTableResult list(HttpServletRequest request, SellerUserInfoVO sellerUserInfoVO) {
         // DataTableResult返回给datatables控件的数据格式
+
         int roleId = Integer.parseInt(String.valueOf(request.getSession().getAttribute("roleId")));
         String userId = ((User)request.getSession().getAttribute("user")).getId();
         String sellerId = ((User)request.getSession().getAttribute("user")).getSeller_id();
@@ -72,6 +73,7 @@ public class SellerController {
         }else if(roleId ==3){
             sellerUserInfoVO.setUserId(sellerId);
         }
+
         DataTableResult result = new DataTableResult();
         // 获取分页参数
         int start = Integer.parseInt(request.getParameter("start"));

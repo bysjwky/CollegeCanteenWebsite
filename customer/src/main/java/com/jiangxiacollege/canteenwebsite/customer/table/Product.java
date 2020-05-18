@@ -3,13 +3,19 @@ package com.jiangxiacollege.canteenwebsite.customer.table;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 @TableName("product")
 public class Product implements Serializable{
+
     @TableId(type= IdType.AUTO)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long sellerId;
     private String name;
     private BigDecimal price;

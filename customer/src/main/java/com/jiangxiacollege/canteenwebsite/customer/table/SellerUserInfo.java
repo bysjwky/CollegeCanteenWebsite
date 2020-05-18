@@ -1,12 +1,15 @@
 package com.jiangxiacollege.canteenwebsite.customer.table;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 import java.io.Serializable;
 
 @TableName("seller_user_info")
 public class SellerUserInfo implements Serializable {
 
+    @JsonSerialize(using = ToStringSerializer.class)
     private  Long id;
     private String userName;
    private String password; //密码

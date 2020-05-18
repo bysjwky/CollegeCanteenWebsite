@@ -25,7 +25,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
         ResponseBase responseBase = new ResponseBase();
         try {
             LambdaQueryWrapper<Product> lq = new QueryWrapper().lambda();
-            lq.eq(Product::getSellerId,1);
+            lq.eq(Product::getSellerId,10000);
             List<Product> list = this.list(lq);
             for(Product product : list){
                 String photoSrc = product.getPhoto();

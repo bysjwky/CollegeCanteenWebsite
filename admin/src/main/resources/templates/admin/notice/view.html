@@ -71,7 +71,7 @@
                             <div class="col-sm-2">
                                 <select id="searchfield" class="form-control">
                                     <!-- value为查找字段名称 -->
-                                    <option value="id">id</option>
+                                    <option value="content">内容</option>
                                 </select>
 
                             </div>
@@ -90,7 +90,7 @@
                             <th style="padding-left: 10px;">
                                 <input type="checkbox" id="cb_selectAll" class="input-lg" style="width:20px;height:20px;"/>
                             </th>
-                            <th>id</th>
+<!--                            <th>id</th>-->
                             <th>内容</th>
                             <th>操作</th>
                         </tr>
@@ -118,22 +118,23 @@
                 <div class="row">
                     <!-- 表单布局 -->
                     <form id="form">
-                        <div class="col-md-12">
+                       <!-- <div class="col-md-12">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label"><font color="#FF0000">*</font>id：</label>
+                                <label class="col-sm-3 control-label">id：</label>
                                 <div class="col-sm-9">
-                                    <!-- 保存修改的主键值 -->
-<!--                                    <input type="hidden" name="id" id="id">-->
+                                    &lt;!&ndash; 保存修改的主键值 &ndash;&gt;
+&lt;!&ndash;                                    <input type="hidden" name="id" id="id">&ndash;&gt;
                                     <input class="form-control" type="text" name="id" id="id">
                                     <span class="help-block m-b-none"></span>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
 
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">内容：</label>
                                 <div class="col-sm-9">
+                                    <input type="hidden" name="id" id="id">
                                     <input class="form-control" type="text" name="content" id="content">
                                     <span class="help-block m-b-none"></span>
                                 </div>
@@ -290,7 +291,7 @@
                         return '<input type="checkbox" value="'+data+'" class="input-lg" style="width:20px;height:20px;" />';
                     }
                 },
-                {"data":"id","name":"id"},
+                // {"data":"id","name":"id"},
                 {"data":"content","name":"content"},
 
                 //有排序功能必须指定name为字段名称

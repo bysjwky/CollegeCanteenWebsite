@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -12,10 +14,15 @@ import java.sql.Timestamp;
 
 @Data
 public class OrderVo implements Serializable{
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long orderId;
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long sellerId;
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long customerId;
+    @JsonSerialize(using = ToStringSerializer.class)
     private  Long productId;
     private String place;
     private int status;
@@ -30,6 +37,7 @@ public class OrderVo implements Serializable{
     private String name;
     private String address;
     private String productName;
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long cartId;
 
 

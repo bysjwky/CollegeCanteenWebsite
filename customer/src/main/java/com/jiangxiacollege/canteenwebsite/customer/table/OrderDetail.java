@@ -21,6 +21,7 @@ public class OrderDetail implements Serializable {
     private Long id;
     @JsonSerialize(using = ToStringSerializer.class)
     private Long orderId;
+    @JsonSerialize(using = ToStringSerializer.class)
     private  Long productId;
     private  int number;
 

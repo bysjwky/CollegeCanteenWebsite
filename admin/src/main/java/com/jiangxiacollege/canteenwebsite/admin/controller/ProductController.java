@@ -122,9 +122,11 @@ public class ProductController
         Json j = new Json();
         j.setSuccess(true);
         Product product1 =  productService.selectById(product.getId());
+        if(!StringUtils.isEmpty(product1.getPhoto())){
         String path = pf+product1.getPhoto().replace("\\\\","\\\\\\\\");
         String suffix = path.split("\\.")[1];
         product1.setPhoto("data:image/"+suffix+";base64,"+ImageUtil2.GetImageStr(path));
+        }
         j.setObj(product1);
         return j;
     }

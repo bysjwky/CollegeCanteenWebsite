@@ -21,8 +21,8 @@
              seller_user_info u
 
         WHERE 1=1
-        <if test="user_name != null">
-            and u.user_name like  concat('%',#{user_name},'%')
+        <if test="shop_name != null">
+            and u.shop_name like  concat('%',#{shop_name},'%')
         </if>
 
 <!--        <if test="userId != null and userId != '' ">-->

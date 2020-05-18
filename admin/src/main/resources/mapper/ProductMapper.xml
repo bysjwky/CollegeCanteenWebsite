@@ -20,8 +20,8 @@
         <!--         LEFT JOIN t_sys_role_user ru ON u.id = ru.sys_user_id
                 LEFT JOIN t_sys_role r ON ru.sys_role_id = r.id -->
         WHERE 1=1
-        <if test="seller_id != null">
-            and p.seller_id like  concat('%',#{seller_id},'%')
+        <if test="name != null">
+            and p.name like  concat('%',#{name},'%')
         </if>
         <if test="userId != null and userId != '' ">
             and p.seller_id = #{userId}

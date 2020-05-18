@@ -63,7 +63,7 @@
                         <div class="form-horizontal">
                             <div class="form-group">
 										<div class="col-sm-4">
-											<button id="btn_add" class="btn btn-primary btn-sm" ><i class="fa fa-plus"></i>&nbsp;添加</button>
+<!--											<button id="btn_add" class="btn btn-primary btn-sm" ><i class="fa fa-plus"></i>&nbsp;添加</button>-->
 											<button id="btn_del" class="btn btn-danger btn-sm m-l-sm" ><i class="fa fa-remove"></i>&nbsp;删除</button>
 											<button id="btn_export" class="btn btn-primary btn-sm m-l-sm" onclick="$('#table').tableExport({type:'excel',escape:'false',tableName:'导出表格',ignoreColumn:[0,4]});"><i class="fa fa-file-excel-o"></i>&nbsp;导出</button>
 										</div>
@@ -71,7 +71,7 @@
 										<div class="col-sm-2">
 											<select id="searchfield" class="form-control">
 												<!-- value为查找字段名称 -->
-												<option value="user_name">用户名</option>
+												<option value="shop_name">名称</option>
 											</select> 
 											
 										</div>
@@ -128,7 +128,7 @@
 					<form id="form">
 							<div class="col-md-12">
 							    <div class="form-group">
-									<label class="col-sm-3 control-label"><font color="#FF0000">*</font>用户名称：</label>
+									<label class="col-sm-3 control-label">用户名称：</label>
 									<div class="col-sm-9">
 									    <!-- 保存修改的主键值 -->
 									    <input type="hidden" name="id" id="id">
@@ -140,7 +140,7 @@
 							</div>
 							<div class="col-md-12">
 							   <div class="form-group">
-								<label class="col-sm-3 control-label"><font color="#FF0000">*</font>用户密码：</label>
+								<label class="col-sm-3 control-label">用户密码：</label>
 								<div class="col-sm-9">
 									<input  class="form-control" type="password" name="password" id="password"
 										placeholder="请输入用户密码" >
@@ -204,7 +204,7 @@
 							    <div class="form-group">
 									<label class="col-sm-3 control-label">图片：</label>
 									<div class="col-sm-9">
-										<img alt="image" id="photo" style="width: 150px; height: 150px;" class="img-circle" >
+										<img alt="image" id="photo" style="width: 150px; height: 150px;" class="img-rounded" >
 									</div>									
 								</div>
 							</div>
@@ -310,7 +310,6 @@
 				}
 			}
 		}); // end ajax
-
 		}//end edit
 	    
 	    //表格行中的按钮点击事件
@@ -335,10 +334,6 @@
 
 		}//end ed
 
-
-
-
-	    
         $(document).ready(function () {
         	//datatable
         	var datatable= $('#table').DataTable({
@@ -642,7 +637,6 @@
         	        	  toastr.success("上传成功！", '成功');
         	        	  myDropzone.removeFile(file);//上传界面的预览删除
         	          }
-        	          
         	        });
         	        this.on("error",function (file,data) {
         	          //上传失败触发的事件
@@ -654,9 +648,6 @@
         	        });
         	      },
         	 });// end Dropzone
-        	 
-        	
-        	 
         });//end ready
     </script>
 </body>

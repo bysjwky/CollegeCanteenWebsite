@@ -71,7 +71,7 @@
                             <div class="col-sm-2">
                                 <select id="searchfield" class="form-control">
                                     <!-- value为查找字段名称 -->
-                                    <option value="seller_id">商家ID</option>
+
                                     <option value="name">商品名称</option>
                                 </select>
 
@@ -93,7 +93,6 @@
                             </th>
                             <th>id</th>
 
-                            <th>商家ID</th>
                             <th>商品名称</th>
                             <th>价格</th>
                             <th>类别</th>
@@ -125,12 +124,12 @@
                 <div class="row">
                     <!-- 表单布局 -->
                     <form id="form">
-                        <div class="col-md-12">
+                        <div class="col-md-12" hidden>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label"><font color="#FF0000">*</font>商家ID：</label>
                                 <div class="col-sm-3">
                                     <input type="hidden" name="id" id="id">
-                                    <input  class="form-control" type="text" name="seller_id" id="seller_id">
+                                    <input  class="form-control" type="text" name="seller_id" id="seller_id" th:value="${session.user.seller_id}">
                                     <span class="help-block m-b-none"></span>
                                 </div>
                             </div>
@@ -356,7 +355,6 @@
                     }
                 },
                 {"data":"id","name":"id"},
-                {"data":"seller_id","name":"seller_id"},
                 {"data":"name","name":"name"},
                 {"data":"price","name":"price"},
                 {"data":"type","name":"type"},
@@ -437,11 +435,12 @@
             //清空数据
 
 
-            $("#seller_id").val("");
+
             $("#name").val("");
             $("#price").val("");
             $("#type").val("");
             $("#photo").val("");
+            $('#photo').attr("src", "");
             $("#sale").val("");
             $("#edit").val("");
 

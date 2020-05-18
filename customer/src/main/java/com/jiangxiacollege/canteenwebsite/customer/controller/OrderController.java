@@ -108,8 +108,7 @@ public class OrderController {
         int money = 0;
 
         Long id =Long.parseLong( SnowflakeIdWorker.getUUID());
-
-
+        
         order.setCustomerId(userId);
         order.setId(id);
         order.setAddressId(addressId);
